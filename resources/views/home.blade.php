@@ -8,21 +8,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
-    <title>MyKanban</title>
+    <title>My Kanban</title>
 </head>
 
 <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
-            <div class="inner">
-                <h3 class="masthead-brand">My Kanban</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link" href="#">Войти</a>
-                    <a class="nav-link" href="#">Зарегистрироватся</a>
-                </nav>
-            </div>
-        </header>
-
+        @include('components.guest-navbar')
         <main role="main" class="inner cover">
             <h1 class="cover-heading">My Kanban</h1>
             <p class="lead">

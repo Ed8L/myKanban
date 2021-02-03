@@ -1,0 +1,29 @@
+.auth-block {
+    margin-top: 100px;
+}
+
+.auth-form {
+    max-width: 540px;
+    min-width: 540px;
+    display: inline-block;
+}
+
+.auth-btn {
+    background-color: #076e70;
+}
+
+.auth-btn:hover {
+    background-color: #1db3b6;
+}
+
+.form-control:focus {
+    border: 3px solid #1db3b6;
+}
+
+li {
+    list-style: none;
+}
+
+.error-text {
+    color: red;
+}
