@@ -12,7 +12,7 @@
         @yield('styles')
     </head>
     <body>
-        <div class="container">
+        <div class="container p-3">
         @include('components.guest-navbar')
         @yield('content')
         </div>

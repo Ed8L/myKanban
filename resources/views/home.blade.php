@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/homepage.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
     <title>My Kanban</title>
@@ -22,9 +23,7 @@
         </main>
 
         <footer class="mastfoot mt-auto">
-            <div class="inner">
-                <p>Edil Mukambetov {{ date('Y') }}</p>
-            </div>
+            <p>Edil Mukambetov {{ date('Y') }}</p>
         </footer>
     </div>
 
