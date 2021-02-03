@@ -1,0 +1,10 @@
+$main_color:  #393e46;
+$secondary_color: #00adb5;
+
+body {
+    background-color: #232931;
+}
+
+body, .nav-link {
+    color: $secondary_color;
+}
