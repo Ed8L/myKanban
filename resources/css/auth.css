@@ -1,29 +1,15 @@
-.auth-block {
-    margin-top: 100px;
+@media(min-width: 621px) {
+    .inner {
+        display: block;
+        justify-content: unset;
+    }
 }
 
-.auth-form {
-    max-width: 540px;
-    min-width: 540px;
-    display: inline-block;
-}
-
-.auth-btn {
-    background-color: #076e70;
-}
-
-.auth-btn:hover {
-    background-color: #1db3b6;
-}
-
-.form-control:focus {
-    border: 3px solid #1db3b6;
-}
-
-li {
-    list-style: none;
+ul {
+    margin-block-end: unset;
 }
 
 .error-text {
     color: red;
+    list-style: none;
 }

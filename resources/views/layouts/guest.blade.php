@@ -8,13 +8,21 @@
         <title>{{ config('app.name', 'My Kanban') }}</title>
 
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/guest.css') }}">
         @yield('styles')
     </head>
-    <body>
-        <div class="container p-3">
-        @include('components.guest-navbar')
-        @yield('content')
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            @include('components.guest-navbar')
+            <main role="main" class="inner cover">
+                @yield('content')
+            </main>
+    
+            <footer class="mastfoot mt-auto">
+                <p>Edil Mukambetov {{ date('Y') }}</p>
+            </footer>
         </div>
+    
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     </body>
 </html>

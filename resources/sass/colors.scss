@@ -1,10 +1,46 @@
-$main_color:  #393e46;
+$main_color: #393e46;
 $secondary_color: #00adb5;
+
+a,
+a:focus,
+a:hover {
+    color: #fff;
+}
 
 body {
     background-color: #232931;
 }
 
-body, .nav-link, .masthead-brand>a {
+html,
+body {
+    background-color: #333;
+}
+
+body,
+.nav-link,
+.masthead-brand>a {
     color: $secondary_color;
+}
+
+.auth-btn {
+    background-color: $secondary_color;
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+    color: #333;
+    background-color: #fff;
+}
+
+.mastfoot {
+    color: rgba(255, 255, 255, .5);
+}
+
+/*
+* Header
+*/
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+    border-bottom-color: rgba(255, 255, 255, .25);
 }
