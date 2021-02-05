@@ -22,7 +22,5 @@
                 <p>Edil Mukambetov {{ date('Y') }}</p>
             </footer>
         </div>
-    
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     </body>
 </html>

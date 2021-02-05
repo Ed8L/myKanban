@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Montserrat-medium";
+  src: url(/fonts/Montserrat-Medium.ttf?e2d60bc49517598c0ce8b98f8d4e579f);
+}
+body {
+  font-family: "Montserrat-medium";
+  background-color: #393e46;
+  color: white;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.bg-dark {
+  background-color: #232931 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link, .project-title {
+  color: #00adb5;
+  transition: 0.2s;
+}
+.navbar-dark .navbar-nav .nav-link:hover, .project-title:hover {
+  color: white;
+}
+
+.big-card {
+  background-color: #232931;
+}
+
+.big-card__header {
+  text-transform: uppercase;
+}
+
+.project {
+  background-color: #393e46;
+}
+
+.logout_btn {
+  cursor: pointer;
+}
+
+.big-card__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add_project {
+  color: #16c79a;
+  transition: 0.2s;
+  text-transform: initial;
+}
+.add_project:hover {
+  color: white;
+}

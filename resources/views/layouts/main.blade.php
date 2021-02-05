@@ -8,8 +8,13 @@
         <title>@yield('title', 'My Kanban')</title>
 
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        @yield('styles')
     </head>
     <body>
+        @include('components.main-navbar')
         @yield('content')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     </body>
 </html>

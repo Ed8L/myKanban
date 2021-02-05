@@ -1,0 +1,55 @@
+@import '../fonts.scss', '../colors.scss';
+
+body {
+    font-family: 'Montserrat-medium';
+    background-color: $third_color;
+    color: white;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+// Header
+.bg-dark {
+    background-color: $main_color !important;
+}
+
+.navbar-dark .navbar-nav .nav-link, .project-title{
+    color: $secondary_color;
+    transition: .2s;
+    &:hover {
+        color: white;
+    }
+}
+
+// Content
+.big-card {
+    background-color: $main_color;
+}
+
+.big-card__header {
+    text-transform: uppercase;
+}
+
+.project {
+    background-color: $third_color;
+}
+
+.logout_btn {
+    cursor: pointer;
+}
+
+.big-card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_project {
+    color: #16c79a;
+    transition: .2s;
+    &:hover {
+        color: white;
+    }
+    text-transform: initial;
+}
