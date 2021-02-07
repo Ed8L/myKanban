@@ -9,12 +9,6 @@ class PageController extends Controller
 {
     public function dashboard($user_login)
     {
-        $user = DB::table('users')->where('login', '=', $user_login)->get();
-
-        if($user) {
-            return view('dashboard', ['user_login' => $user_login]);
-        }
-
-        abort(404);
+        return view('dashboard', ['user_login' => $user_login]);
     }
 }
