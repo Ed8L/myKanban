@@ -3,7 +3,7 @@
 html,
 body {
     height: 100%;
-    color: $secondary_color;
+    color: $contentText_color;
 }
 
 body {
@@ -62,7 +62,7 @@ a:hover {
 
     a {
         text-decoration: none;
-        color: $secondary_color;
+        color: $contentText_color;
     }
 }
 
@@ -77,7 +77,7 @@ a:hover {
 }
 
 .auth-btn {
-    background-color: $secondary_color;
+    background-color: $contentText_color;
 }
 
 @media (min-width: 48em) {

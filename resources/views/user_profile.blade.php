@@ -1,28 +1,33 @@
 @extends('layouts.main')
 
 @section('content')
+@include('projects.create_project')
 <div class="container-fluid mt-5">
     <div class="card big-card">
         <div class="card-header big-card__header">
             <div class="big-card__header__title">
                 Все проекты
             </div>
-            <a href="" class="add_project">
+            <a class="add_project" data-toggle="modal" data-target="#createProjectModal">
                 Добавить проект
             </a>
         </div>
         <div class="card-body">
-            <div class="row">
-                @forelse  ($projects as $project)
+            <div class="row" id="projects-row">
+                @forelse ($projects as $project)
                 <div class="col-lg-4 col-md-6">
                     <div class="card project mb-3">
-                        <div class="card-body">
-                            <a class="project-title" href="">{{ $project->title }}</a>
-                        </div>
+                        <a class="project-title" href="">
+                            <div class="card-body text-center">
+                                <p>{{ $project->title }}</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 @empty
+                <div id="empty-message">
                     У вас нет проектов
+                </div>
                 @endforelse
             </div>
         </div>

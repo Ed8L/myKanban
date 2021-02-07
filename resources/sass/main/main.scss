@@ -8,6 +8,15 @@ body {
 
 a {
     text-decoration: none !important;
+    cursor: pointer;
+}
+
+.validation_error {
+    border: 1px solid red;
+}
+
+.invalid-feedback {
+    display: block;
 }
 
 // Header
@@ -16,7 +25,7 @@ a {
 }
 
 .navbar-dark .navbar-nav .nav-link, .project-title{
-    color: $secondary_color;
+    color: $contentText_color;
     transition: .2s;
     &:hover {
         color: white;
@@ -46,10 +55,32 @@ a {
 }
 
 .add_project {
-    color: #16c79a;
+    color: $action_color;
     transition: .2s;
     &:hover {
         color: white;
     }
     text-transform: initial;
+}
+
+.modal-content {
+    background-color: $main_color;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0,0,0,.125);
+    .btn-primary {
+        background-color: $action_color;
+        &:hover {
+            background-color: $action_color-hover;
+        }
+    }
+}
+
+.closeModal-btn {
+    color: white;
 }

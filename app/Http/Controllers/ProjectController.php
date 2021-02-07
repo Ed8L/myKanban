@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrUpdateProject;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,14 +31,20 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created project in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreOrUpdateProject  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateProject $request)
     {
-        //
+        $project = new Project;
+
+        $project->user_id = auth()->user()->id;
+        $project->title = $request->title;
+        $project->save();
+
+        return response()->json(['created' => true, 'newProject' => $project]);
     }
 
     /**

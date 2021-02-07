@@ -10,6 +10,15 @@ body {
 
 a {
   text-decoration: none !important;
+  cursor: pointer;
+}
+
+.validation_error {
+  border: 1px solid red;
+}
+
+.invalid-feedback {
+  display: block;
 }
 
 .bg-dark {
@@ -51,5 +60,27 @@ a {
   text-transform: initial;
 }
 .add_project:hover {
+  color: white;
+}
+
+.modal-content {
+  background-color: #232931;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.modal-footer .btn-primary {
+  background-color: #16c79a;
+}
+.modal-footer .btn-primary:hover {
+  background-color: #0aa17b;
+}
+
+.closeModal-btn {
   color: white;
 }
