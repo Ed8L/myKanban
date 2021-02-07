@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ route('dashboard', $user_login) }}">My Kanban</a>
+    <a class="navbar-brand" href="{{ route('userProfile', $user_login) }}">My Kanban</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard', $user_login) }}">Профиль</a>
+                <a class="nav-link" href="{{ route('userProfile', $user_login) }}">Профиль</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Настройки профиля</a>

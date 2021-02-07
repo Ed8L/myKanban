@@ -13,18 +13,19 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @for ($i = 0; $i < 7; $i++) <div class="col-lg-4 col-md-6">
+                @forelse  ($projects as $project)
+                <div class="col-lg-4 col-md-6">
                     <div class="card project mb-3">
                         <div class="card-body">
-                            <a class="project-title" href="">Project name</a>
+                            <a class="project-title" href="">{{ $project->title }}</a>
                         </div>
                     </div>
+                </div>
+                @empty
+                    У вас нет проектов
+                @endforelse
             </div>
-            @endfor
         </div>
-
-
     </div>
-</div>
 </div>
 @endsection
