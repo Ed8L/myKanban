@@ -84,3 +84,7 @@ a {
 .closeModal-btn {
   color: white;
 }
+
+#create_msg {
+  color: #1cb51c;
+}

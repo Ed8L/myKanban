@@ -1,4 +1,10 @@
 const project_title = $('#createProjectForm').children('.form-group').children('#project_title');
+const createdMsg = $('#create_msg');
+
+function clearModal() {
+    project_title.removeClass('validation_error');
+    $('.invalid-feedback').remove();
+}
 
 function addProject() {
     $.ajax({
@@ -14,10 +20,7 @@ function addProject() {
         success (response) {
             if(response.created) {
                 const newProject = response.newProject;
-
-                if($('#empty-message')) {
-                    $('#empty-message').remove();
-                }
+                $('#empty-message').remove();
 
                 $('#projects-row').append(`
                     <div class="col-lg-4 col-md-6">
@@ -29,11 +32,15 @@ function addProject() {
                             </a>
                         </div>
                     </div>`);
+
+                clearModal();
+                createdMsg.text('Проект создан!');
             }
         },
 
         error (response) {
             if(response.responseJSON.errors) {
+                clearModal();
                 const errors = response.responseJSON.errors;
 
                 project_title.addClass('validation_error');
@@ -44,9 +51,10 @@ function addProject() {
 }
 
 $('#createProjectModal').on('hidden.bs.modal', () => {
-    project_title.removeClass('validation_error');
-    $('.invalid-feedback').remove();
-})
+    clearModal();
+    createdMsg.remove();
+    project_title.val('');
+});
 
 $('#createProject-btn').click((e) => {
     e.preventDefault();

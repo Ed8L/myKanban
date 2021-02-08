@@ -8,6 +8,12 @@
 /***/ (() => {
 
 var project_title = $('#createProjectForm').children('.form-group').children('#project_title');
+var createdMsg = $('#create_msg');
+
+function clearModal() {
+  project_title.removeClass('validation_error');
+  $('.invalid-feedback').remove();
+}
 
 function addProject() {
   $.ajax({
@@ -23,16 +29,15 @@ function addProject() {
     success: function success(response) {
       if (response.created) {
         var newProject = response.newProject;
-
-        if ($('#empty-message')) {
-          $('#empty-message').remove();
-        }
-
+        $('#empty-message').remove();
         $('#projects-row').append("\n                    <div class=\"col-lg-4 col-md-6\">\n                        <div class=\"card project mb-3\">\n                            <a class=\"project-title\" href=\"\">\n                                <div class=\"card-body text-center\">\n                                    <p>".concat(newProject.title, "</p>\n                                </div>\n                            </a>\n                        </div>\n                    </div>"));
+        clearModal();
+        createdMsg.text('Проект создан!');
       }
     },
     error: function error(response) {
       if (response.responseJSON.errors) {
+        clearModal();
         var errors = response.responseJSON.errors;
         project_title.addClass('validation_error');
         $("<div class=\"invalid-feedback\">".concat(errors.title, "</div>")).insertAfter(project_title);
@@ -42,8 +47,9 @@ function addProject() {
 }
 
 $('#createProjectModal').on('hidden.bs.modal', function () {
-  project_title.removeClass('validation_error');
-  $('.invalid-feedback').remove();
+  clearModal();
+  createdMsg.remove();
+  project_title.val('');
 });
 $('#createProject-btn').click(function (e) {
   e.preventDefault();

@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('scripts')
+<script src="{{ asset('assets/js/projects.js') }}"></script>
+@endsection
+
 @section('content')
 @include('projects.create_project')
 <div class="container-fluid mt-5">

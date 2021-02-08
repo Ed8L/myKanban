@@ -17,6 +17,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <div id="create_msg"></div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary" id="createProject-btn">Создать проект</button>
             </div>
