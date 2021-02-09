@@ -8,8 +8,8 @@ Route::get('/', function () {
     return view('home');
 })->middleware('guest')->name('home');
 
-Route::get('/user/{user_login}', [PageController::class, 'userProfile'])->middleware(['auth'])->name('userProfile');
+Route::get('profile', [PageController::class, 'showUserProfile'])->middleware(['auth'])->name('userProfile');
 
-Route::resource('project', ProjectController::class);
+Route::resource('project', ProjectController::class)->only(['store', 'show']);
 
 require __DIR__.'/auth.php';
