@@ -33,11 +33,11 @@ a {
   color: white;
 }
 
-.big-card {
+.card {
   background-color: #232931;
 }
 
-.big-card__header {
+.card-header {
   text-transform: uppercase;
 }
 
@@ -87,4 +87,23 @@ a {
 
 #create_msg {
   color: #1cb51c;
+}
+
+.project-listing {
+  background-color: #393e46;
+}
+
+.specific-project .card-header {
+  text-transform: initial;
+}
+
+.project-actions {
+  text-align: end;
+}
+
+@media (max-width: 575px) {
+  .project-actions {
+    margin-top: 10px;
+    text-align: center;
+  }
 }

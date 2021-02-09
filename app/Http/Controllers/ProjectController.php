@@ -6,6 +6,8 @@ use App\Http\Requests\StoreOrUpdateProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ToDoListController;
+use App\Http\Controllers\BoardController;
 
 class ProjectController extends Controller
 {
@@ -17,7 +19,7 @@ class ProjectController extends Controller
      */
     public static function index(int $user_id)
     {
-        return DB::table('projects')->where('user_id', '=', $user_id)->get();
+        return DB::table('projects')->where('user_id', '=', $user_id)->select('id', 'title')->get();
     }
 
     /**
@@ -55,7 +57,15 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = DB::table('projects')->select('title')->where('id', '=', $id);
+        $todoList = ToDoListController::index($id);
+        $boards = BoardController::index($id);
+
+        if($project->exists()){
+            return view('projects.project', ['project' => $project->first(), 'todolist' => $todoList, 'boards' => $boards]);
+        }
+
+        abort(404);
     }
 
     /**

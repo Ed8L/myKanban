@@ -21,7 +21,7 @@
                 @forelse ($projects as $project)
                 <div class="col-lg-4 col-md-6">
                     <div class="card project mb-3">
-                        <a class="project-title" href="">
+                        <a class="project-title" href="{{ route('project.show', ['project' => $project->id]) }}">
                             <div class="card-body text-center">
                                 <p>{{ $project->title }}</p>
                             </div>
