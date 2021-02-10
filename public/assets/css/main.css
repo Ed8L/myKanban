@@ -97,13 +97,22 @@ a {
   text-transform: initial;
 }
 
-.project-actions {
-  text-align: end;
+.create__resource-block {
+  text-align: center;
+}
+.create__resource-block button {
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #16c79a;
+  border: unset;
+}
+.create__resource-block button:hover, .create__resource-block button:focus {
+  background-color: #0aa17b;
 }
 
-@media (max-width: 575px) {
-  .project-actions {
-    margin-top: 10px;
-    text-align: center;
-  }
+.project-action {
+  background-color: #16c79a;
+}
+.project-action:hover, .project-action:focus {
+  background-color: #0aa17b;
 }

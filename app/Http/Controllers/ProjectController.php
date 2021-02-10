@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrUpdateProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,23 +22,14 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created project in storage.
      *
      * @param  \App\Http\Requests\StoreOrUpdateProject  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrUpdateProject $request)
+    public function store(Request $request)
     {
+        $request->validate(['title' => ['required', 'string', 'max:255']]);
         $project = new Project;
 
         $project->user_id = auth()->user()->id;
@@ -57,26 +47,23 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = DB::table('projects')->select('title')->where('id', '=', $id);
+        $project = DB::table('projects')->select('id', 'title')->where('id', '=', $id);
         $todoList = ToDoListController::index($id);
+        $todoListTasks = ToDoListTaskController::index($id);
         $boards = BoardController::index($id);
-
+        $taskStatuses = StatusCodesController::getAll();
+        
         if($project->exists()){
-            return view('projects.project', ['project' => $project->first(), 'todolist' => $todoList, 'boards' => $boards]);
+            return view('projects.project', [
+                'project' => $project->first(),
+                'todolist' => $todoList,
+                'boards' => $boards,
+                'todoListTasks' => $todoListTasks,
+                'statuses' => $taskStatuses
+            ]);
         }
 
         abort(404);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

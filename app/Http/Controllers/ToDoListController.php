@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ToDoList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,16 +19,6 @@ class ToDoListController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,29 +26,23 @@ class ToDoListController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $projectId = $request->project_id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if(DB::table('projects')->where('id', $projectId)->exists()) {
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+            if(DB::table('todo_lists')->where('project_id', $projectId)->exists()) {
+                return response()->json(['created' => false, 'message' => 'Можно создать только один To Do список на один проект']);
+            }
+
+            $todo = new ToDoList();
+
+            $todo->project_id = $projectId;
+            $todo->save();
+
+            return response()->json(['created' => true, 'new_todo' => $todo]);
+        }
+
+        return redirect()->back();
     }
 
     /**

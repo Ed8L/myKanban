@@ -99,13 +99,22 @@ a {
     }
 }
 
-.project-actions {
-    text-align: end;
+.create__resource-block {
+    text-align: center;
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: $action_color;
+        border: unset;
+        &:hover, &:focus {
+            background-color: $action_color-hover;
+        }
+    }
 }
 
-@media(max-width: 575px) {
-    .project-actions {
-        margin-top: 10px;
-        text-align: center;
+.project-action {
+    background-color: $action_color;
+    &:hover, &:focus {
+        background-color: $action_color-hover;
     }
 }
