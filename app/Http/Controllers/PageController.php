@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProjectRepository;
+
 class PageController extends Controller
 {
     /**
@@ -9,8 +11,8 @@ class PageController extends Controller
      */
     public function showUserProfile()
     {
-        $projects = ProjectController::index(auth()->user()->id);
+        $projects = ProjectRepository::getAll();
 
-        return view('user_profile', ['projects' => $projects]);
+        return view('user_profile', compact('projects'));
     }
 }

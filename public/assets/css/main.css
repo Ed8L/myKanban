@@ -2,6 +2,10 @@
   font-family: "Montserrat-medium";
   src: url(/fonts/Montserrat-Medium.ttf?e2d60bc49517598c0ce8b98f8d4e579f);
 }
+.c-red {
+  color: red;
+}
+
 body {
   font-family: "Montserrat-medium";
   background-color: #393e46;
@@ -21,6 +25,13 @@ a {
   display: block;
 }
 
+.action {
+  color: #16c79a;
+}
+.action:hover {
+  color: #0aa17b;
+}
+
 .bg-dark {
   background-color: #232931 !important;
 }
@@ -33,86 +44,14 @@ a {
   color: white;
 }
 
-.card {
-  background-color: #232931;
-}
-
-.card-header {
-  text-transform: uppercase;
-}
-
-.project {
-  background-color: #393e46;
-}
-
-.logout_btn {
-  cursor: pointer;
-}
-
-.big-card__header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.add_project {
-  color: #16c79a;
-  transition: 0.2s;
-  text-transform: initial;
-}
-.add_project:hover {
-  color: white;
-}
-
 .modal-content {
   background-color: #232931;
 }
 
-.modal-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.modal-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-.modal-footer .btn-primary {
-  background-color: #16c79a;
-}
-.modal-footer .btn-primary:hover {
-  background-color: #0aa17b;
-}
-
-.closeModal-btn {
-  color: white;
-}
-
-#create_msg {
-  color: #1cb51c;
-}
-
 .project-listing {
+  background-color: #232931;
+}
+
+.project-card {
   background-color: #393e46;
-}
-
-.specific-project .card-header {
-  text-transform: initial;
-}
-
-.create__resource-block {
-  text-align: center;
-}
-.create__resource-block button {
-  width: 100%;
-  margin-bottom: 10px;
-  background-color: #16c79a;
-  border: unset;
-}
-.create__resource-block button:hover, .create__resource-block button:focus {
-  background-color: #0aa17b;
-}
-
-.project-action {
-  background-color: #16c79a;
-}
-.project-action:hover, .project-action:focus {
-  background-color: #0aa17b;
 }

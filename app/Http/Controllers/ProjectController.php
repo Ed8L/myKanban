@@ -2,90 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\ToDoListController;
-use App\Http\Controllers\BoardController;
+use App\Http\Requests\Project\StoreOrUpdateProjectRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use App\Repositories\BoardRepository;
+use App\Repositories\ProjectRepository;
+use App\Repositories\ToDoListRepository;
+use App\Repositories\ToDoListTasksRepository;
 
 class ProjectController extends Controller
 {
     /**
-     * Get all projects of specific user
-     *
-     * @param int $user_id
-     * @return \Illuminate\Support\Facades\DB
-     */
-    public static function index(int $user_id)
-    {
-        return DB::table('projects')->where('user_id', '=', $user_id)->select('id', 'title')->get();
-    }
-
-    /**
      * Store a newly created project in storage.
      *
-     * @param  \App\Http\Requests\StoreOrUpdateProject  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreOrUpdateProjectRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateProjectRequest $request): RedirectResponse
     {
-        $request->validate(['title' => ['required', 'string', 'max:255']]);
-        $project = new Project;
+        $created = ProjectRepository::store($request->title);
 
-        $project->user_id = auth()->user()->id;
-        $project->title = $request->title;
-        $project->save();
-
-        return response()->json(['created' => true, 'newProject' => $project]);
+        if($created) {
+            return redirect()
+                ->route('userProfile')
+                ->with('success', 'Проект создан!');
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ошибка сохранения.'])
+                ->withInput();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $project = DB::table('projects')->select('id', 'title')->where('id', '=', $id);
-        $todoList = ToDoListController::index($id);
-        $todoListTasks = ToDoListTaskController::index($id);
-        $boards = BoardController::index($id);
-        $taskStatuses = StatusCodesController::getAll();
-        
-        if($project->exists()){
-            return view('projects.project', [
-                'project' => $project->first(),
-                'todolist' => $todoList,
-                'boards' => $boards,
-                'todoListTasks' => $todoListTasks,
-                'statuses' => $taskStatuses
+
+    }
+
+    /**
+     * Update the project
+     *
+     * @param StoreOrUpdateProjectRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(StoreOrUpdateProjectRequest $request, int $id): JsonResponse
+    {
+        $updated = ProjectRepository::update($id, $request->validated());
+
+        if ($updated) {
+            return response()->json([
+                'updated' => true,
+                'updatedTitle' => $updated->title
             ]);
         }
 
-        abort(404);
+        return response()->json([
+            'updated' => false,
+            'msg' => 'Ошибка сохранения'
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Delete the the project.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse|RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function destroy(int $id)
     {
-        //
-    }
+        $deleted = ProjectRepository::delete($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if($deleted) {
+            return response()->json(['deleted' => true]);
+        } else {
+            return response()->json(['deleted' => false, 'msg' => 'Ошибка удаления.']);
+        }
     }
 }

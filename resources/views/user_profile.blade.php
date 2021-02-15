@@ -1,40 +1,38 @@
 @extends('layouts.main')
 
-@section('scripts')
-<script src="{{ asset('assets/js/projects.js') }}"></script>
+@section('content')
+    <div class="container-fluid mt-5">
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+               {{ $errors->first() }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        <div class="d-flex justify-content-between">
+            <h3 class="mb-4">Ваши проекты</h3>
+            <nav class="nav text-right">
+                <a class="nav-link action" href="#" data-toggle="modal" data-target="#create_project-modal">Добавить
+                    проект</a>
+            </nav>
+        </div>
+        @include('project.create_project-modal')
+        @include('project.edit_project-modal')
+        @include('project.project_listing')
+    </div>
 @endsection
 
-@section('content')
-@include('projects.create_project')
-<div class="container-fluid mt-5">
-    <div class="card big-card">
-        <div class="card-header big-card__header">
-            <div class="big-card__header__title">
-                Все проекты
-            </div>
-            <a class="add_project" data-toggle="modal" data-target="#createProjectModal">
-                Добавить проект
-            </a>
-        </div>
-        <div class="card-body">
-            <div class="row" id="projects-row">
-                @forelse ($projects as $project)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card project mb-3">
-                        <a class="project-title" href="{{ route('project.show', ['project' => $project->id]) }}">
-                            <div class="card-body text-center">
-                                <p>{{ $project->title }}</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                @empty
-                <div id="empty-message">
-                    У вас нет проектов
-                </div>
-                @endforelse
-            </div>
-        </div>
-    </div>
-</div>
+@section('scripts')
+    <script src="{{ asset('assets/js/project/index.js') }}"></script>
 @endsection

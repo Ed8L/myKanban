@@ -13,11 +13,11 @@
     </head>
     <body class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-            @include('components.guest-navbar')
+            @include('components.guest_navbar')
             <main role="main" class="inner cover">
                 @yield('content')
             </main>
-    
+
             <footer class="mastfoot mt-auto">
                 <p>Edil Mukambetov {{ date('Y') }}</p>
             </footer>

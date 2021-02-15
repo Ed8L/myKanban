@@ -1,60 +1,74 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/projects.js":
-/*!**********************************!*\
-  !*** ./resources/js/projects.js ***!
-  \**********************************/
+/***/ "./resources/js/project/index.js":
+/*!***************************************!*\
+  !*** ./resources/js/project/index.js ***!
+  \***************************************/
 /***/ (() => {
 
 $(document).ready(function () {
-  var project_title = $('#createProjectForm').children('.form-group').children('#project_title');
-  var createdMsg = $('#create_msg');
+  $('.alert').alert();
+  var newTitleInput = $('#project_newTitle-input'); // renaming project input
 
-  function clearModal() {
-    project_title.removeClass('validation_error');
-    $('.invalid-feedback').remove();
-  }
+  var editProjectModal = $('#edit_project-modal');
 
-  function addProject() {
+  function clearModal(modalSelector) {
+    modalSelector.find('.invalid-feedback').remove();
+    modalSelector.find('.c-red').remove();
+  } // Fill input with project name
+
+
+  $('.project-edit').click(function (e) {
+    newTitleInput.val(e.currentTarget.dataset.project_name);
+    newTitleInput.data('element_id', e.currentTarget.dataset.element_id);
+  });
+  editProjectModal.on('hidden.bs.modal', function (e) {
+    clearModal(editProjectModal);
+  });
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $('.delete_project-btn').click(function (e) {
+    var projectId = Number(e.currentTarget.dataset.element_id);
     $.ajax({
-      type: "POST",
-      url: "/project",
-      data: {
-        'title': project_title.val()
-      },
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      dataType: "JSON",
+      type: 'DELETE',
+      url: "/project/".concat(projectId),
+      dataType: 'JSON',
       success: function success(response) {
-        if (response.created) {
-          var newProject = response.newProject;
-          $('#empty-message').remove();
-          $('#projects-row').append("\n                    <div class=\"col-lg-4 col-md-6\">\n                    <div class=\"card project mb-3\">\n                        <a class=\"project-title\" href=\"project/".concat(newProject.id, "\">\n                            <div class=\"card-body text-center\">\n                                <p>").concat(newProject.title, "</p>\n                            </div>\n                        </a>\n                    </div>\n                </div>"));
-          clearModal();
-          createdMsg.text('Проект создан!');
-        }
-      },
-      error: function error(response) {
-        if (response.responseJSON.errors) {
-          clearModal();
-          var errors = response.responseJSON.errors;
-          project_title.addClass('validation_error');
-          $("<div class=\"invalid-feedback\">".concat(errors.title, "</div>")).insertAfter(project_title);
+        if (response.deleted) {
+          $('#project-' + projectId).remove();
+        } else {
+          alert(response.msg);
         }
       }
     });
-  }
-
-  $('#createProjectModal').on('hidden.bs.modal', function () {
-    clearModal();
-    createdMsg.remove();
-    project_title.val('');
   });
-  $('#createProject-btn').click(function (e) {
-    e.preventDefault();
-    addProject();
+  $('.edit_project-btn').click(function () {
+    var projectId = Number(newTitleInput.data('element_id'));
+    $.ajax({
+      type: 'PATCH',
+      url: "/project/".concat(projectId),
+      data: {
+        'title': newTitleInput.val()
+      },
+      dataType: 'JSON',
+      success: function success(response) {
+        if (response.updated) {
+          $('#project-' + projectId).find('.card-text').text(response.updatedTitle);
+          editProjectModal.modal('hide');
+        } else {
+          editProjectModal.find('.modal-footer').prepend("<span class=\"c-red\">".concat(response.msg, "</span>"));
+        }
+      },
+      error: function error(response) {
+        clearModal(editProjectModal);
+        var errors = response.responseJSON.errors;
+        editProjectModal.find('.modal-body').append("<div class=\"invalid-feedback\">".concat(errors.title[0], "</div>"));
+      }
+    });
   });
 });
 
@@ -155,11 +169,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// Promise = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/assets/js/projects": 0
+/******/ 			"/assets/js/project/index": 0
 /******/ 		};
 /******/ 		
 /******/ 		var deferredModules = [
-/******/ 			["./resources/js/projects.js"],
+/******/ 			["./resources/js/project/index.js"],
 /******/ 			["./resources/sass/guest/guest.scss"],
 /******/ 			["./resources/sass/main/main.scss"],
 /******/ 			["./resources/css/auth.css"]

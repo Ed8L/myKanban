@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\DB;
 class BoardController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public static function index($project_id)
-    {
-        return DB::table('boards')->where('project_id', '=', $project_id)->get();
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
