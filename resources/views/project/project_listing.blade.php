@@ -1,13 +1,17 @@
-<div class="card project-listing">
+<div class="card main-card">
     <div class="card-body">
         <div class="row">
             @foreach($projects as $project)
                 <div class="col-6" id="project-{{ $project->id }}">
-                    <div class="card project-card mb-3">
+                    <div class="card inner-card mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-text">{{ $project->title }}</div>
+                                    <div class="card-text">
+                                        <a class="project-title" href="{{ route('project.show', $project->id) }}">
+                                            {{ $project->title }}
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="col text-right">
                                     <div class="btn-group btn-group-sm" role="group">

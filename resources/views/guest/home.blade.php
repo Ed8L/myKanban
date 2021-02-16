@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('guest.layouts.guest')
 
 @section('content')
 <h1 class="cover-heading">My Kanban</h1>

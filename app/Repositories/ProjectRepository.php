@@ -78,6 +78,7 @@ class ProjectRepository
      * Delete the project
      *
      * @param $project_id
+     * @return false
      */
     public static function delete($project_id)
     {

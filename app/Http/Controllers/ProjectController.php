@@ -13,6 +13,7 @@ use App\Repositories\BoardRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\ToDoListRepository;
 use App\Repositories\ToDoListTasksRepository;
+use phpDocumentor\Reflection\Project;
 
 class ProjectController extends Controller
 {
@@ -41,10 +42,17 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param int $id
+     * @return Application|Factory|View
      */
     public function show(int $id)
     {
+        $project = ProjectRepository::getById($id);
 
+        if(empty($project)) {
+            abort(404);
+        }
+
+        return view('project.project', compact('project'));
     }
 
     /**
