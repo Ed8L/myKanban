@@ -8,12 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use App\Repositories\BoardRepository;
 use App\Repositories\ProjectRepository;
-use App\Repositories\ToDoListRepository;
-use App\Repositories\ToDoListTasksRepository;
-use phpDocumentor\Reflection\Project;
 
 class ProjectController extends Controller
 {

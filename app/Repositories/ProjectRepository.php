@@ -95,7 +95,7 @@ class ProjectRepository
      * @param $projectId
      * @return bool
      */
-    private static function exists($projectId)
+    private static function exists($projectId): bool
     {
         return DB::table('projects')->where('id', $projectId)->exists();
     }
