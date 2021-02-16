@@ -20,8 +20,8 @@ $(document).ready(function () {
 
 
   $('.project-edit').click(function (e) {
-    newTitleInput.val(e.currentTarget.dataset.project_name);
-    newTitleInput.data('element_id', e.currentTarget.dataset.element_id);
+    newTitleInput.val(e.currentTarget.dataset.name);
+    newTitleInput.data('id', e.currentTarget.dataset.id);
   });
   editProjectModal.on('hidden.bs.modal', function (e) {
     clearModal(editProjectModal);
@@ -33,7 +33,7 @@ $(document).ready(function () {
   });
   $('.delete_project-btn').click(function (e) {
     if (window.confirm("Вы уверены что хотите удалить этот проект?")) {
-      var projectId = Number(e.currentTarget.dataset.element_id);
+      var projectId = Number(e.currentTarget.dataset.id);
       $.ajax({
         type: 'DELETE',
         url: "/project/".concat(projectId),
@@ -49,7 +49,7 @@ $(document).ready(function () {
     }
   });
   $('.edit_project-btn').click(function () {
-    var projectId = Number(newTitleInput.data('element_id'));
+    var projectId = Number(newTitleInput.data('id'));
     $.ajax({
       type: 'PATCH',
       url: "/project/".concat(projectId),
@@ -62,7 +62,7 @@ $(document).ready(function () {
         if (response.updated) {
           var project = $('#project-' + projectId);
           project.find('.project-title').text(response.updatedTitle);
-          project.find('.project-edit').attr('data-project_name', response.updatedTitle);
+          project.find('.project-edit').attr('data-name', response.updatedTitle);
           editProjectModal.modal('hide');
         } else {
           editProjectModal.find('.modal-footer').prepend("<span class=\"c-red\">".concat(response.msg, "</span>"));

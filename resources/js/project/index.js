@@ -11,8 +11,8 @@ $(document).ready(() => {
 
     // Fill input with project name
     $('.project-edit').click((e) => {
-        newTitleInput.val(e.currentTarget.dataset.project_name);
-        newTitleInput.data('element_id', e.currentTarget.dataset.element_id);
+        newTitleInput.val(e.currentTarget.dataset.name);
+        newTitleInput.data('id', e.currentTarget.dataset.id);
     });
 
     editProjectModal.on('hidden.bs.modal', function (e) {
@@ -27,7 +27,7 @@ $(document).ready(() => {
 
     $('.delete_project-btn').click((e) => {
         if (window.confirm("Вы уверены что хотите удалить этот проект?")) {
-            const projectId = Number(e.currentTarget.dataset.element_id);
+            const projectId = Number(e.currentTarget.dataset.id);
 
             $.ajax({
                 type: 'DELETE',
@@ -45,7 +45,7 @@ $(document).ready(() => {
     });
 
     $('.edit_project-btn').click(() => {
-        const projectId = Number(newTitleInput.data('element_id'));
+        const projectId = Number(newTitleInput.data('id'));
         $.ajax({
             type: 'PATCH',
             url: `/project/${projectId}`,
@@ -59,7 +59,7 @@ $(document).ready(() => {
                     const project = $('#project-' + projectId);
 
                     project.find('.project-title').text(response.updatedTitle);
-                    project.find('.project-edit').attr('data-project_name', response.updatedTitle);
+                    project.find('.project-edit').attr('data-name', response.updatedTitle);
 
                     editProjectModal.modal('hide');
                 } else {
