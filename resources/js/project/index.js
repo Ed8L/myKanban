@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $('.alert').alert()
+    $('.alert').alert();
 
     const newTitleInput = $('#project_newTitle-input'); // renaming project input
     const editProjectModal = $('#edit_project-modal');
@@ -17,7 +17,7 @@ $(document).ready(() => {
 
     editProjectModal.on('hidden.bs.modal', function (e) {
         clearModal(editProjectModal);
-    })
+    });
 
     $.ajaxSetup({
         headers: {
@@ -26,20 +26,22 @@ $(document).ready(() => {
     });
 
     $('.delete_project-btn').click((e) => {
-        const projectId = Number(e.currentTarget.dataset.element_id);
+        if (window.confirm("Вы уверены что хотите удалить этот проект?")) {
+            const projectId = Number(e.currentTarget.dataset.element_id);
 
-        $.ajax({
-            type: 'DELETE',
-            url: `/project/${projectId}`,
-            dataType: 'JSON',
-            success(response) {
-                if (response.deleted) {
-                    $('#project-' + projectId).remove();
-                } else {
-                    alert(response.msg)
+            $.ajax({
+                type: 'DELETE',
+                url: `/project/${projectId}`,
+                dataType: 'JSON',
+                success(response) {
+                    if (response.deleted) {
+                        $('#project-' + projectId).remove();
+                    } else {
+                        alert(response.msg);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     $('.edit_project-btn').click(() => {
@@ -48,12 +50,17 @@ $(document).ready(() => {
             type: 'PATCH',
             url: `/project/${projectId}`,
             data: {
+                'id': projectId,
                 'title': newTitleInput.val()
             },
             dataType: 'JSON',
             success(response) {
                 if (response.updated) {
-                    $('#project-' + projectId).find('.card-text').text(response.updatedTitle);
+                    const project = $('#project-' + projectId);
+
+                    project.find('.project-title').text(response.updatedTitle);
+                    project.find('.project-edit').attr('data-project_name', response.updatedTitle);
+
                     editProjectModal.modal('hide');
                 } else {
                     editProjectModal.find('.modal-footer').prepend(`<span class="c-red">${response.msg}</span>`);
@@ -61,7 +68,13 @@ $(document).ready(() => {
             },
             error(response) {
                 clearModal(editProjectModal);
+
                 const errors = response.responseJSON.errors;
+                if (errors.id) {
+                    alert(errors.id[0]);
+                    location.reload();
+                }
+
                 editProjectModal.find('.modal-body').append(`<div class="invalid-feedback">${errors.title[0]}</div>`);
             }
         });

@@ -32,19 +32,21 @@ $(document).ready(function () {
     }
   });
   $('.delete_project-btn').click(function (e) {
-    var projectId = Number(e.currentTarget.dataset.element_id);
-    $.ajax({
-      type: 'DELETE',
-      url: "/project/".concat(projectId),
-      dataType: 'JSON',
-      success: function success(response) {
-        if (response.deleted) {
-          $('#project-' + projectId).remove();
-        } else {
-          alert(response.msg);
+    if (window.confirm("Вы уверены что хотите удалить этот проект?")) {
+      var projectId = Number(e.currentTarget.dataset.element_id);
+      $.ajax({
+        type: 'DELETE',
+        url: "/project/".concat(projectId),
+        dataType: 'JSON',
+        success: function success(response) {
+          if (response.deleted) {
+            $('#project-' + projectId).remove();
+          } else {
+            alert(response.msg);
+          }
         }
-      }
-    });
+      });
+    }
   });
   $('.edit_project-btn').click(function () {
     var projectId = Number(newTitleInput.data('element_id'));
@@ -52,12 +54,15 @@ $(document).ready(function () {
       type: 'PATCH',
       url: "/project/".concat(projectId),
       data: {
+        'id': projectId,
         'title': newTitleInput.val()
       },
       dataType: 'JSON',
       success: function success(response) {
         if (response.updated) {
-          $('#project-' + projectId).find('.card-text').text(response.updatedTitle);
+          var project = $('#project-' + projectId);
+          project.find('.project-title').text(response.updatedTitle);
+          project.find('.project-edit').attr('data-project_name', response.updatedTitle);
           editProjectModal.modal('hide');
         } else {
           editProjectModal.find('.modal-footer').prepend("<span class=\"c-red\">".concat(response.msg, "</span>"));
@@ -66,6 +71,12 @@ $(document).ready(function () {
       error: function error(response) {
         clearModal(editProjectModal);
         var errors = response.responseJSON.errors;
+
+        if (errors.id) {
+          alert(errors.id[0]);
+          location.reload();
+        }
+
         editProjectModal.find('.modal-body').append("<div class=\"invalid-feedback\">".concat(errors.title[0], "</div>"));
       }
     });
