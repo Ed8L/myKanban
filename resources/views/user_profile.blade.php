@@ -27,9 +27,9 @@
                     проект</a>
             </nav>
         </div>
-        @include('project.create_project-modal')
+        @include('project.components.create_project-modal')
         @include('project.edit_project-modal')
-        @include('project.project_listing')
+        @include('project.index')
     </div>
 @endsection
 

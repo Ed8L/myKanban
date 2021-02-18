@@ -13,6 +13,16 @@ use App\Repositories\ProjectRepository;
 class ProjectController extends Controller
 {
     /**
+     * Display a listing of projects
+     */
+    public function index()
+    {
+        $projects = ProjectRepository::getAll();
+
+        return view('user_profile', compact('projects'));
+    }
+
+    /**
      * Store a newly created project in storage.
      *
      * @param StoreOrUpdateProjectRequest $request
@@ -47,7 +57,7 @@ class ProjectController extends Controller
             abort(404);
         }
 
-        return view('project.project', compact('project'));
+        return view('project.show', compact('project'));
     }
 
     /**
