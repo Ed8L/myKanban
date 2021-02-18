@@ -8,18 +8,18 @@ use App\Models\Project;
 
 class ProjectRepository
 {
-    private static array $fields = ['id', 'title'];
+    private static array $columns = ['id', 'title'];
 
     /**
      * Get all user projects
      *
      * @return Collection
      */
-    public static function getAll():Collection
+    public static function getAll(): Collection
     {
         return DB::table('projects')
             ->where('user_id', auth()->user()->id)
-            ->select(self::$fields)
+            ->select(self::$columns)
             ->get();
     }
 
@@ -32,10 +32,8 @@ class ProjectRepository
     public static function getById(int $id)
     {
         return DB::table('projects')
-            ->where('id', $id)
-            ->select(self::$fields)
-            ->get()
-            ->first();
+            ->select(self::$columns)
+            ->find($id);
     }
 
     /**
@@ -57,15 +55,15 @@ class ProjectRepository
      * Update the project
      *
      * @param int $project_id
-     * @param array $fields
+     * @param array $columns
      * @return mixed
      */
-    public static function update(int $project_id, array $fields)
+    public static function update(int $project_id, array $columns)
     {
-        if(self::exists($project_id)) {
+        if (self::exists($project_id)) {
             $project = Project::find($project_id);
 
-            $project->fill($fields);
+            $project->fill($columns);
             $project->save();
 
             return $project;
@@ -80,9 +78,9 @@ class ProjectRepository
      * @param $project_id
      * @return false
      */
-    public static function delete($project_id)
+    public static function delete($project_id): bool
     {
-        if(self::exists($project_id)) {
+        if (self::exists($project_id)) {
             $project = Project::find($project_id);
             return $project->delete();
         }

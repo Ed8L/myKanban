@@ -4,7 +4,7 @@ namespace App\Http\Requests\todolist;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ToDoListRequest extends FormRequest
+class StoreTodoListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ToDoListRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ToDoListRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_id' => ['exists:projects']
+            'id' => ['exists:projects', 'unique:todo_lists,project_id']
         ];
     }
 }

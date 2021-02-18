@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Repositories\ProjectRepository;
+use App\Repositories\TodoListRepository;
 
 class ProjectController extends Controller
 {
@@ -53,11 +54,13 @@ class ProjectController extends Controller
     {
         $project = ProjectRepository::getById($id);
 
+        $todo = TodoListRepository::getTodo($id);
+
         if(empty($project)) {
             abort(404);
         }
 
-        return view('project.show', compact('project'));
+        return view('project.show', compact(['project', 'todo']));
     }
 
     /**

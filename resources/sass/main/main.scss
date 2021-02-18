@@ -25,6 +25,7 @@ a {
 
 .action {
     color: $action_color;
+
     &:hover {
         color: $action_color-hover;
     }
@@ -35,9 +36,10 @@ a {
     background-color: $main_color !important;
 }
 
-.navbar-dark .navbar-nav .nav-link, .project-title{
+.navbar-dark .navbar-nav .nav-link, .project-title {
     color: $contentText_color;
     transition: .2s;
+
     &:hover {
         color: white;
     }
@@ -52,9 +54,36 @@ a {
 // Card
 
 .main-card {
-   background-color: $main_color;
+    background-color: $main_color;
 }
 
 .inner-card {
     background-color: $third_color;
+}
+
+.todo-table {
+    color: white;
+}
+
+.todo-thead {
+    tr {
+        th {
+            text-align: center;
+        }
+    }
+}
+
+
+#add-task {
+    @media(min-width: 768px) {
+        margin-left: 50px;
+    }
+
+    @media(min-width: 1000px) {
+        margin-left: 70px;
+    }
+
+    @media(max-width: 767px) {
+        margin-top: 20px;
+    }
 }

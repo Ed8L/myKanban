@@ -2,23 +2,8 @@
 
 @section('content')
     <div class="container-fluid mt-5">
-        @if($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-               {{ $errors->first() }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+        @include('components.errors')
+        @include('components.session-success')
 
         <div class="d-flex justify-content-between">
             <h3 class="mb-4">Ваши проекты</h3>
@@ -28,7 +13,7 @@
             </nav>
         </div>
         @include('project.components.create_project-modal')
-        @include('project.edit_project-modal')
+        @include('project.components.edit_project-modal')
         @include('project.index')
     </div>
 @endsection

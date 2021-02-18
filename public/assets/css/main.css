@@ -55,3 +55,27 @@ a {
 .inner-card {
   background-color: #393e46;
 }
+
+.todo-table {
+  color: white;
+}
+
+.todo-thead tr th {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  #add-task {
+    margin-left: 50px;
+  }
+}
+@media (min-width: 1000px) {
+  #add-task {
+    margin-left: 70px;
+  }
+}
+@media (max-width: 767px) {
+  #add-task {
+    margin-top: 20px;
+  }
+}
