@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreOrUpdateProjectRequest;
+use App\Repositories\TodoListTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,6 +16,7 @@ class ProjectController extends Controller
 {
     /**
      * Display a listing of projects
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -55,12 +57,13 @@ class ProjectController extends Controller
         $project = ProjectRepository::getById($id);
 
         $todo = TodoListRepository::getTodo($id);
+        $todoTasks = TodoListTaskRepository::getAll();
 
         if(empty($project)) {
             abort(404);
         }
 
-        return view('project.show', compact(['project', 'todo']));
+        return view('project.show', compact(['project', 'todo', 'todoTasks']));
     }
 
     /**

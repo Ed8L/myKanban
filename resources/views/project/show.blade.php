@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('scripts')
+    <script src="{{ asset('assets/js/todoTask/index.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="container-fluid mt-5">
         @include('components.errors')

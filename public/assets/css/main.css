@@ -64,18 +64,13 @@ a {
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  #add-task {
-    margin-left: 50px;
+@media (max-width: 370px) {
+  .form-control {
+    font-size: 15px;
   }
 }
-@media (min-width: 1000px) {
-  #add-task {
-    margin-left: 70px;
-  }
-}
-@media (max-width: 767px) {
-  #add-task {
-    margin-top: 20px;
+@media (max-width: 320px) {
+  .form-control {
+    font-size: 11px;
   }
 }

@@ -74,16 +74,12 @@ a {
 }
 
 
-#add-task {
-    @media(min-width: 768px) {
-        margin-left: 50px;
+.form-control {
+    @media(max-width: 370px) {
+        font-size: 15px;
     }
 
-    @media(min-width: 1000px) {
-        margin-left: 70px;
-    }
-
-    @media(max-width: 767px) {
-        margin-top: 20px;
+    @media(max-width: 320px) {
+        font-size: 11px;
     }
 }

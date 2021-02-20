@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\todolist;
+namespace App\Http\Requests\TodoListTask;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTodoListRequest extends FormRequest
+class TodoListTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class StoreTodoListRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['exists:projects', 'unique:todo_lists,project_id']
+            'text' => ['required'],
+            'due' => ['date'],
+            'todo_list_id' => ['exists:todo_lists,id']
         ];
     }
 }
