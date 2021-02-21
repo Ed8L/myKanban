@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class TodoListTaskRepository
 {
-    public static function getAll()
+    public static function getAll($id)
     {
         return DB::table('todolist_tasks')
             ->select('id', 'text', 'due')
+            ->where('todo_list_id', $id)
             ->orderByDesc('created_at')
             ->get();
     }

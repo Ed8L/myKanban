@@ -10,4 +10,9 @@ class TodoList extends Model
     use HasFactory;
 
     protected $table = 'todo_lists';
+
+    public function tasks()
+    {
+        return $this->hasMany(TodoListTask::class);
+    }
 }
