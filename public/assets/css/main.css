@@ -74,3 +74,11 @@ a {
     font-size: 11px;
   }
 }
+
+.task {
+  cursor: pointer;
+  transition: 0.2s;
+}
+.task:hover {
+  background-color: #232931;
+}

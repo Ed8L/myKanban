@@ -20,7 +20,7 @@
                 <table class="table table-bordered todo-table">
                     <thead class="todo-thead">
                     <tr>
-                        <th width="10%" scope="col">Выполнено?</th>
+                        <th width="15%" scope="col">Статус</th>
                         <th>Задача</th>
                         <th width="20%" scope="col">Срок</th>
                     </tr>

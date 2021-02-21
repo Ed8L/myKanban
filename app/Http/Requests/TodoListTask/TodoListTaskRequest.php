@@ -3,6 +3,7 @@
 namespace App\Http\Requests\TodoListTask;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TodoListTaskRequest extends FormRequest
 {
@@ -26,7 +27,8 @@ class TodoListTaskRequest extends FormRequest
         return [
             'text' => ['required'],
             'due' => ['date'],
-            'todo_list_id' => ['exists:todo_lists,id']
+            'todo_list_id' => ['exists:todo_lists,id'],
+            'completed' => ['required', Rule::in([0,1])]
         ];
     }
 }

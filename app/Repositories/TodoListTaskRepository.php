@@ -7,6 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class TodoListTaskRepository
 {
+    public static function update($id, $columns)
+    {
+        $task = TodoListTask::find($id);
+
+        $task->fill($columns);
+        $task->save();
+
+        return $task;
+    }
+
+    public static function getById($id)
+    {
+        return DB::table('todolist_tasks')
+            ->select('text', 'due', 'completed')
+            ->where('id', $id)
+            ->get()
+            ->first();
+    }
+
     public static function getAll($id)
     {
         return DB::table('todolist_tasks')

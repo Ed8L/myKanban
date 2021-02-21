@@ -11,7 +11,22 @@ class TodoListTask extends Model
     use HasFactory;
 
     protected $table = 'todolist_tasks';
-    protected $fillable = ['todo_list_id', 'text', 'due'];
+    protected $fillable = ['todo_list_id', 'text', 'due', 'completed'];
+
+    /**
+     * Get the task's status
+     *
+     * @param $value
+     * @return string
+     */
+    public function getCompletedAttribute($value)
+    {
+        if($value == 0) {
+            return 'Не выполнено';
+        } else {
+            return 'Выполнено';
+        }
+    }
 
     /**
      * Get the task's due date

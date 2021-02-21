@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TodoListTask\TodoListTaskRequest;
 use App\Repositories\TodoListTaskRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TodoListTaskController extends Controller
@@ -32,16 +31,25 @@ class TodoListTaskController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $task = TodoListTaskRepository::getById($id);
+        $found = true;
+        return response()->json(compact('found', 'task'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param TodoListTaskRequest $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(TodoListTaskRequest $request, $id)
     {
-        //
+        $updated = TodoListTaskRepository::update($id, $request->validated());
+
+        return response()->json(['updated' => true, 'task' => $updated]);
     }
 
     /**

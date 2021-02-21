@@ -73,7 +73,6 @@ a {
     }
 }
 
-
 .form-control {
     @media(max-width: 370px) {
         font-size: 15px;
@@ -81,5 +80,13 @@ a {
 
     @media(max-width: 320px) {
         font-size: 11px;
+    }
+}
+
+.task {
+    cursor: pointer;
+    transition: .2s;
+    &:hover {
+        background-color: $main_color;
     }
 }

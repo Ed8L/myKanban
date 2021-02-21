@@ -16,7 +16,7 @@ Route::get('profile', [ProjectController::class, 'index'])
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('project', ProjectController::class)->only(['store', 'show', 'update', 'destroy']);
     Route::resource('todo', TodoListController::class)->only(['store', 'destroy']);
-    Route::resource('task', TodoListTaskController::class)->only(['store']);
+    Route::resource('task', TodoListTaskController::class)->only(['store', 'show', 'update']);
 });
 
 require __DIR__ . '/auth.php';
