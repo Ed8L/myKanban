@@ -64,8 +64,7 @@ class ProjectController extends Controller
             return view('project.show', compact(['project']));
         }
 
-        $todoTasks = TodoList::find($todo->id)->tasks;
-
+        $todoTasks = TodoList::find($todo->id)->tasks->sortDesc();
 
         return view('project.show', compact(['project', 'todo', 'todoTasks']));
     }

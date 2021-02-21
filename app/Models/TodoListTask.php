@@ -12,4 +12,30 @@ class TodoListTask extends Model
 
     protected $table = 'todolist_tasks';
     protected $fillable = ['todo_list_id', 'text', 'due'];
+
+    /**
+     * Get the task's due date
+     *
+     * @param $value
+     * @return string
+     */
+    public function getDueAttribute($value)
+    {
+        $timestamp = strtotime($value);
+        $date_fields = getdate($timestamp);
+        $months = [1 => 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+
+        foreach($date_fields as $field) {
+            foreach ($months as $month_key => $month) {
+                if($date_fields['mon'] === $month_key) {
+                    $date_fields['mon'] = $month;
+                }
+            }
+        }
+
+        $day = $date_fields['mday'];
+        $month = $date_fields['mon'];
+
+        return $day . ' ' . $month;
+    }
 }

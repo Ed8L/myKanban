@@ -25,7 +25,8 @@ $(document).ready(function () {
       success: function success(response) {
         if (response.created) {
           var newTask = response.newTask;
-          var newTaskHTML = "<tr>\n                                            <td>input</td>\n                                            <td>".concat(newTask.text, "</td>\n                                            <td>").concat(newTask.due, "</td>\n                                        </tr>");
+          var due = formatDate(newTask.due);
+          var newTaskHTML = "<tr>\n                                            <td>input</td>\n                                            <td>".concat(newTask.text, "</td>\n                                            <td>").concat(due, "</td>\n                                        </tr>");
           $('#todoListBody').prepend(newTaskHTML);
         }
       },
@@ -34,6 +35,32 @@ $(document).ready(function () {
       }
     });
   });
+
+  function formatDate(date) {
+    var dueObject = new Date(date);
+    var months = {
+      0: 'Января',
+      1: 'Февраля',
+      2: 'Марта',
+      3: 'Апреля',
+      4: 'Мая',
+      5: 'Июня',
+      6: 'Июля',
+      7: 'Августа',
+      8: 'Сентября',
+      9: 'Октября',
+      10: 'Ноября',
+      11: 'Декабря'
+    };
+    var day = date.slice(-2);
+    var month = months[dueObject.getMonth()];
+
+    if (day[0] === '0') {
+      day = day.slice(-1);
+    }
+
+    return day + ' ' + month;
+  }
 });
 /******/ })()
 ;
