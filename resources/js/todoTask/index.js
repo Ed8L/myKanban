@@ -62,7 +62,10 @@ $(document).ready(() => {
                     taskModal.find('.modal-title').text(task.text);
                     taskModal.find('[type="text"]').val(task.text);
                     document.querySelector('#taskDue').valueAsDate = new Date(task.due);
+
                     document.querySelector('#editTask').dataset.taskId = taskId;
+                    document.querySelector('#deleteTask').dataset.taskId = taskId;
+
                     taskModal.find(`option[value="${task.completed}"]`).attr('selected', 'selected');
 
                     taskModal.modal('show');
@@ -87,7 +90,7 @@ $(document).ready(() => {
             },
             dataType: 'JSON',
             success(response) {
-                if(response.updated) {
+                if (response.updated) {
                     const task = response.task;
 
                     const trow = $(`tr[data-taskid="${task.id}"]`);
@@ -104,6 +107,22 @@ $(document).ready(() => {
                 const textInput = taskModal.find('[type="text"]');
 
                 $(`<div class="invalid-feedback">${error.text}</div>`).insertAfter(textInput);
+            }
+        });
+    });
+
+    $('#deleteTask').click((e) => {
+        const taskId = Number(e.currentTarget.dataset.taskId);
+
+        $.ajax({
+            method: 'DELETE',
+            url: `/task/${taskId}`,
+            dataType: 'JSON',
+            success(response) {
+                if(response.deleted) {
+                    const trow = $(`tr[data-taskid="${taskId}"]`);
+                    trow.remove();
+                }
             }
         });
     });

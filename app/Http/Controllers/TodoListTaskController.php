@@ -56,10 +56,16 @@ class TodoListTaskController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $deleted = TodoListTaskRepository::delete($id);
+
+        if($deleted) {
+            return response()->json(['deleted' => true]);
+        }
+
+        return response()->json(['deleted' => false, 'msg' => 'Ошибка удаления.']);
     }
 }

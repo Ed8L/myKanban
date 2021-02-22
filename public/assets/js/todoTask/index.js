@@ -56,6 +56,7 @@ $(document).ready(function () {
           taskModal.find('[type="text"]').val(task.text);
           document.querySelector('#taskDue').valueAsDate = new Date(task.due);
           document.querySelector('#editTask').dataset.taskId = taskId;
+          document.querySelector('#deleteTask').dataset.taskId = taskId;
           taskModal.find("option[value=\"".concat(task.completed, "\"]")).attr('selected', 'selected');
           taskModal.modal('show');
         }
@@ -90,6 +91,20 @@ $(document).ready(function () {
         var error = response.responseJSON.errors;
         var textInput = taskModal.find('[type="text"]');
         $("<div class=\"invalid-feedback\">".concat(error.text, "</div>")).insertAfter(textInput);
+      }
+    });
+  });
+  $('#deleteTask').click(function (e) {
+    var taskId = Number(e.currentTarget.dataset.taskId);
+    $.ajax({
+      method: 'DELETE',
+      url: "/task/".concat(taskId),
+      dataType: 'JSON',
+      success: function success(response) {
+        if (response.deleted) {
+          var trow = $("tr[data-taskid=\"".concat(taskId, "\"]"));
+          trow.remove();
+        }
       }
     });
   });

@@ -9,6 +9,7 @@ use App\Models\Project;
 class ProjectRepository
 {
     private static array $columns = ['id', 'title'];
+    private static string $tableName = 'projects';
 
     /**
      * Get all user projects
@@ -17,7 +18,7 @@ class ProjectRepository
      */
     public static function getAll(): Collection
     {
-        return DB::table('projects')
+        return DB::table(self::$tableName)
             ->where('user_id', auth()->user()->id)
             ->select(self::$columns)
             ->get();
@@ -31,7 +32,7 @@ class ProjectRepository
      */
     public static function getById(int $id)
     {
-        return DB::table('projects')
+        return DB::table(self::$tableName)
             ->select(self::$columns)
             ->find($id);
     }
