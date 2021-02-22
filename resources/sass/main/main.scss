@@ -1,8 +1,6 @@
 @import '../fonts.scss', '../colors.scss';
-
-.c-red {
-    color: red;
-}
+@import "boards";
+@import "tasks";
 
 body {
     font-family: 'Montserrat-medium';
@@ -10,17 +8,15 @@ body {
     color: white;
 }
 
+// Links
 a {
     text-decoration: none !important;
     cursor: pointer;
-}
-
-.validation_error {
-    border: 1px solid red;
-}
-
-.invalid-feedback {
-    display: block;
+    color: $contentText_color;
+    transition: .2s;
+    &:hover {
+        color: white;
+    }
 }
 
 .action {
@@ -46,13 +42,11 @@ a {
 }
 
 // Modal
-
 .modal-content {
     background-color: $main_color;
 }
 
 // Card
-
 .main-card {
     background-color: $main_color;
 }
@@ -61,16 +55,13 @@ a {
     background-color: $third_color;
 }
 
-.todo-table {
-    color: white;
+//Global
+.validation_error {
+    border: 1px solid red;
 }
 
-.todo-thead {
-    tr {
-        th {
-            text-align: center;
-        }
-    }
+.invalid-feedback {
+    display: block;
 }
 
 .form-control {
@@ -80,13 +71,5 @@ a {
 
     @media(max-width: 320px) {
         font-size: 11px;
-    }
-}
-
-.task {
-    cursor: pointer;
-    transition: .2s;
-    &:hover {
-        background-color: $main_color;
     }
 }

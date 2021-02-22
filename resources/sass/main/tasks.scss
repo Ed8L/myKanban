@@ -1,0 +1,19 @@
+.todo-table {
+    color: white;
+}
+
+.todo-thead {
+    tr {
+        th {
+            text-align: center;
+        }
+    }
+}
+
+.task {
+    cursor: pointer;
+    transition: .2s;
+    &:hover {
+        background-color: $main_color;
+    }
+}

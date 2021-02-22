@@ -1,0 +1,17 @@
+.boards-row {
+    padding: 10px;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+}
+
+.board {
+    min-height: 300px;
+    background-color: #393e46;
+}
+
+.card-col {
+    @media (max-width: 450px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

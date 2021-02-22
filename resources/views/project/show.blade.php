@@ -52,7 +52,7 @@
                         @endif
                     </div>
                     <div class="tab-pane fade" id="boards">
-                        second tab
+                        @include('board.index')
                     </div>
                 </div>
             </div>

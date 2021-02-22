@@ -2,8 +2,38 @@
   font-family: "Montserrat-medium";
   src: url(/fonts/Montserrat-Medium.ttf?e2d60bc49517598c0ce8b98f8d4e579f);
 }
-.c-red {
-  color: red;
+.boards-row {
+  padding: 10px;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+}
+
+.board {
+  min-height: 300px;
+  background-color: #393e46;
+}
+
+@media (max-width: 450px) {
+  .card-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.todo-table {
+  color: white;
+}
+
+.todo-thead tr th {
+  text-align: center;
+}
+
+.task {
+  cursor: pointer;
+  transition: 0.2s;
+}
+.task:hover {
+  background-color: #232931;
 }
 
 body {
@@ -15,14 +45,11 @@ body {
 a {
   text-decoration: none !important;
   cursor: pointer;
+  color: #00adb5;
+  transition: 0.2s;
 }
-
-.validation_error {
-  border: 1px solid red;
-}
-
-.invalid-feedback {
-  display: block;
+a:hover {
+  color: white;
 }
 
 .action {
@@ -56,12 +83,12 @@ a {
   background-color: #393e46;
 }
 
-.todo-table {
-  color: white;
+.validation_error {
+  border: 1px solid red;
 }
 
-.todo-thead tr th {
-  text-align: center;
+.invalid-feedback {
+  display: block;
 }
 
 @media (max-width: 370px) {
@@ -73,12 +100,4 @@ a {
   .form-control {
     font-size: 11px;
   }
-}
-
-.task {
-  cursor: pointer;
-  transition: 0.2s;
-}
-.task:hover {
-  background-color: #232931;
 }
