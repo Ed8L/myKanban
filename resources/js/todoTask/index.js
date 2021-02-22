@@ -28,8 +28,8 @@ $(document).ready(() => {
                     const newTask = response.newTask;
                     const due = formatDate(newTask.due);
 
-                    const newTaskHTML = `<tr>
-                                            <td>input</td>
+                    const newTaskHTML = `<tr class="task" data-taskId="${newTask.id}">
+                                            <td>Не выполнено</td>
                                             <td>${newTask.text}</td>
                                             <td>${due}</td>
                                         </tr>`;

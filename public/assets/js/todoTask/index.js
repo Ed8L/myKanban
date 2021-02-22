@@ -28,7 +28,7 @@ $(document).ready(function () {
         if (response.created) {
           var newTask = response.newTask;
           var due = formatDate(newTask.due);
-          var newTaskHTML = "<tr>\n                                            <td>input</td>\n                                            <td>".concat(newTask.text, "</td>\n                                            <td>").concat(due, "</td>\n                                        </tr>");
+          var newTaskHTML = "<tr class=\"task\" data-taskId=\"".concat(newTask.id, "\">\n                                            <td>\u041D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E</td>\n                                            <td>").concat(newTask.text, "</td>\n                                            <td>").concat(due, "</td>\n                                        </tr>");
           $('#todoListBody').prepend(newTaskHTML);
         }
       },

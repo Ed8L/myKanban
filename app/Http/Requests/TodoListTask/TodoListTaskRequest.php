@@ -28,7 +28,7 @@ class TodoListTaskRequest extends FormRequest
             'text' => ['required'],
             'due' => ['date'],
             'todo_list_id' => ['exists:todo_lists,id'],
-            'completed' => ['required', Rule::in([0,1])]
+            'completed' => [Rule::in([0,1])]
         ];
     }
 }
