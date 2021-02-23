@@ -47,7 +47,7 @@ $(document).ready(function () {
     var taskId = Number(e.currentTarget.dataset.taskid);
     $.ajax({
       type: 'GET',
-      url: "/task/".concat(taskId),
+      url: "/task/".concat(taskId, "/edit"),
       dataType: 'JSON',
       success: function success(response) {
         if (response.found) {

@@ -68,19 +68,4 @@ class TodoListTaskRepository
             ->get()
             ->first();
     }
-
-    /**
-     * Get all tasks for a todoList
-     *
-     * @param $id
-     * @return Collection
-     */
-    public static function getAll($id)
-    {
-        return DB::table(self::$tableName)
-            ->select('id', 'text', 'due')
-            ->where('todo_list_id', $id)
-            ->orderByDesc('created_at')
-            ->get();
-    }
 }

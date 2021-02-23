@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TodoListTask\TodoListTaskRequest;
 use App\Repositories\TodoListTaskRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class TodoListTaskController extends Controller
 {
@@ -31,7 +30,7 @@ class TodoListTaskController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function edit($id)
     {
         $task = TodoListTaskRepository::getById($id);
         $found = true;

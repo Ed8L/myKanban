@@ -53,7 +53,7 @@ $(document).ready(() => {
 
         $.ajax({
             type: 'GET',
-            url: `/task/${taskId}`,
+            url: `/task/${taskId}/edit`,
             dataType: 'JSON',
             success(response) {
                 if (response.found) {
