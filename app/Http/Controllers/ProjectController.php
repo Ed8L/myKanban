@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreOrUpdateProjectRequest;
 use App\Models\TodoList;
+use App\Repositories\BoardsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -35,7 +36,7 @@ class ProjectController extends Controller
     {
         $created = ProjectRepository::store($request->title);
 
-        if($created) {
+        if ($created) {
             return redirect()
                 ->route('userProfile')
                 ->with('success', 'Проект создан!');
@@ -55,18 +56,24 @@ class ProjectController extends Controller
     public function show(int $id)
     {
         $project = ProjectRepository::getById($id);
-        if(empty($project)) {
+        if (empty($project)) {
             abort(404);
         }
 
+        $data = ['project']; // data that'll be passed to the view
+
         $todo = TodoListRepository::getTodo($id);
-        if(empty($todo)) {
-            return view('project.show', compact(['project']));
+        $boards = BoardsRepository::getAll($id);
+
+        if (!empty($todo)) {
+            $todoTasks = TodoList::find($todo->id)->tasks->sortDesc();
+            array_push($data, 'todo', 'todoTasks');
+        }
+        if (!empty($boards)) {
+            $data[] = 'boards';
         }
 
-        $todoTasks = TodoList::find($todo->id)->tasks->sortDesc();
-
-        return view('project.show', compact(['project', 'todo', 'todoTasks']));
+        return view('project.show', compact($data));
     }
 
     /**
@@ -103,7 +110,7 @@ class ProjectController extends Controller
     {
         $deleted = ProjectRepository::delete($id);
 
-        if($deleted) {
+        if ($deleted) {
             return response()->json(['deleted' => true]);
         } else {
             return response()->json(['deleted' => false, 'msg' => 'Ошибка удаления.']);

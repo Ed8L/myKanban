@@ -52,7 +52,9 @@
                         @endif
                     </div>
                     <div class="tab-pane fade" id="boards">
-                        @include('board.index')
+                        @if(!empty($boards))
+                            @include('board.index')
+                        @endif
                     </div>
                 </div>
             </div>
