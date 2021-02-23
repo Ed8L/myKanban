@@ -5,4 +5,5 @@ mix.sass('resources/sass/guest/guest.scss', 'public/assets/css')
     .postCss('resources/css/auth.css', 'public/assets/css')
     .js('resources/js/project/index.js', 'public/assets/js/project')
     .js('resources/js/todoTask/index.js', 'public/assets/js/todoTask')
+    .js('resources/js/board/index.js', 'public/assets/js/board')
     .browserSync('mykanban.loc');
