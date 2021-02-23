@@ -90,6 +90,7 @@ $(document).ready(() => {
             success(response) {
                 if (response.deleted) {
                     $(`#board-${boardId}`).remove();
+                    editBoardModal.modal('hide');
                 }
             }
         });

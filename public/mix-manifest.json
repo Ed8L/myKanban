@@ -1,6 +1,7 @@
 {
     "/assets/js/project/index.js": "/assets/js/project/index.js",
     "/assets/js/todoTask/index.js": "/assets/js/todoTask/index.js",
+    "/assets/js/board/index.js": "/assets/js/board/index.js",
     "/assets/css/auth.css": "/assets/css/auth.css",
     "/assets/css/main.css": "/assets/css/main.css",
     "/assets/css/guest.css": "/assets/css/guest.css"

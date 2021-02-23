@@ -82,6 +82,7 @@ $(document).ready(function () {
       success: function success(response) {
         if (response.deleted) {
           $("#board-".concat(boardId)).remove();
+          editBoardModal.modal('hide');
         }
       }
     });
