@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Board\StoreBoardRequest;
 use App\Http\Requests\Board\UpdateBoardRequest;
 use Illuminate\Http\JsonResponse;
-use App\Repositories\BoardsRepository;
+use App\Repositories\BoardRepository;
 
 class BoardController extends Controller
 {
@@ -17,7 +17,7 @@ class BoardController extends Controller
      */
     public function store(StoreBoardRequest $request)
     {
-        $board = BoardsRepository::store($request->validated());
+        $board = BoardRepository::store($request->validated());
 
         return response()->json(['created' => true, 'board' => $board]);
     }
@@ -30,7 +30,7 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        $board = BoardsRepository::getById($id);
+        $board = BoardRepository::getById($id);
 
         if(!empty($board)) {
             return response()->json(compact('board'));
@@ -46,7 +46,7 @@ class BoardController extends Controller
      */
     public function update(UpdateBoardRequest $request, $id)
     {
-        $boardTitle = BoardsRepository::update($id, $request->title);
+        $boardTitle = BoardRepository::update($id, $request->title);
 
         return response()->json(['updated' => true, 'newTitle' => $boardTitle]);
     }
@@ -59,7 +59,7 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = BoardsRepository::delete($id);
+        $deleted = BoardRepository::delete($id);
 
         return response()->json(compact('deleted'));
     }

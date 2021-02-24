@@ -16,7 +16,7 @@ $(document).ready(() => {
 
         $.ajax({
             type: 'POST',
-            url: '/task',
+            url: '/todoListTask',
             dataType: 'JSON',
             data: {
                 'todo_list_id': todoId,
@@ -53,7 +53,7 @@ $(document).ready(() => {
 
         $.ajax({
             type: 'GET',
-            url: `/task/${taskId}/edit`,
+            url: `/todoListTask/${taskId}/edit`,
             dataType: 'JSON',
             success(response) {
                 if (response.found) {
@@ -82,7 +82,7 @@ $(document).ready(() => {
 
         $.ajax({
             method: 'PATCH',
-            url: `/task/${taskId}`,
+            url: `/todoListTask/${taskId}`,
             data: {
                 'text': taskInput.val(),
                 'completed': status,
@@ -116,7 +116,7 @@ $(document).ready(() => {
 
         $.ajax({
             method: 'DELETE',
-            url: `/task/${taskId}`,
+            url: `/todoListTask/${taskId}`,
             dataType: 'JSON',
             success(response) {
                 if(response.deleted) {

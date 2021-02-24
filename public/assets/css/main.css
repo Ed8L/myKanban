@@ -9,7 +9,7 @@
 }
 
 .board {
-  min-height: 300px;
+  min-height: 400px;
   background-color: #393e46;
 }
 
@@ -18,6 +18,10 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
+}
+
+.boardTask-card {
+  background-color: #232931;
 }
 
 .todo-table {

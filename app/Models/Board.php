@@ -10,4 +10,9 @@ class Board extends Model
     use HasFactory;
 
     protected $fillable = ['project_id', 'title'];
+
+    public function tasks()
+    {
+        return $this->hasMany(BoardTask::class);
+    }
 }

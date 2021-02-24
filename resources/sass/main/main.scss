@@ -1,6 +1,4 @@
-@import '../fonts.scss', '../colors.scss';
-@import "boards";
-@import "tasks";
+@import '../fonts.scss', '../colors.scss', 'boards', 'tasks';
 
 body {
     font-family: 'Montserrat-medium';

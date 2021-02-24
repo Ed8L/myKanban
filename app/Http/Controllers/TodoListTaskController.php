@@ -17,19 +17,25 @@ class TodoListTaskController extends Controller
     public function store(TodoListTaskRequest $request)
     {
         $newTask = TodoListTaskRepository::store($request->validated());
+        $newTask = $newTask->getAttributes();
 
-        $attributes = $newTask->getAttributes();
-
-        unset($attributes['created_at']);
-        unset($attributes['updated_at']);
-        unset($attributes['todo_list_id']);
+        //Delete unnecessary fields
+        unset($newTask['created_at']);
+        unset($newTask['updated_at']);
+        unset($newTask['todo_list_id']);
 
         return response()->json([
             'created' => true,
-            'newTask' => $attributes
+            'newTask' => $newTask
         ]);
     }
 
+    /**
+     * Get the data to update
+     *
+     * @param $id
+     * @return JsonResponse
+     */
     public function edit($id)
     {
         $task = TodoListTaskRepository::getById($id);

@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Board;
 use Illuminate\Support\Facades\DB;
 
-class BoardsRepository
+class BoardRepository
 {
     /**
      * Get board by id

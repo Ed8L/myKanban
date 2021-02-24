@@ -26,7 +26,7 @@
                     </tr>
                     </thead>
                     <tbody id="todoListBody">
-                        @include('task.index')
+                        @include('todo.todoListTask.index')
                     </tbody>
                 </table>
             </div>

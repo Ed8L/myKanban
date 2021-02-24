@@ -3,6 +3,7 @@
 @section('scripts')
     <script src="{{ asset('assets/js/todoTask/index.js') }}"></script>
     <script src="{{ asset('assets/js/board/index.js') }}"></script>
+    <script src="{{ asset('assets/js/boardTask/index.js') }}"></script>
 @endsection
 
 @section('content')

@@ -17,7 +17,7 @@ $(document).ready(function () {
     var taskDueDate = $('#taskDueDate');
     $.ajax({
       type: 'POST',
-      url: '/task',
+      url: '/todoListTask',
       dataType: 'JSON',
       data: {
         'todo_list_id': todoId,
@@ -47,7 +47,7 @@ $(document).ready(function () {
     var taskId = Number(e.currentTarget.dataset.taskid);
     $.ajax({
       type: 'GET',
-      url: "/task/".concat(taskId, "/edit"),
+      url: "/todoListTask/".concat(taskId, "/edit"),
       dataType: 'JSON',
       success: function success(response) {
         if (response.found) {
@@ -70,7 +70,7 @@ $(document).ready(function () {
     var status = Number($('[name="status"]').val());
     $.ajax({
       method: 'PATCH',
-      url: "/task/".concat(taskId),
+      url: "/todoListTask/".concat(taskId),
       data: {
         'text': taskInput.val(),
         'completed': status,
@@ -98,7 +98,7 @@ $(document).ready(function () {
     var taskId = Number(e.currentTarget.dataset.taskId);
     $.ajax({
       method: 'DELETE',
-      url: "/task/".concat(taskId),
+      url: "/todoListTask/".concat(taskId),
       dataType: 'JSON',
       success: function success(response) {
         if (response.deleted) {

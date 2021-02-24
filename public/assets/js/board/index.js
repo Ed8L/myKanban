@@ -89,7 +89,7 @@ $(document).ready(function () {
   }); //Верстка доски
 
   function createBoardHtml(board) {
-    return "<div class=\"col-8 col-sm-6 col-md-5 col-lg-3 card-col\">\n            <div class=\"card board\">\n                <div class=\"card-header\">\n                    <a href=\"\">".concat(board.title, "</a>\n                </div>\n                <div class=\"card-body\">\n                </div>\n                <div class=\"card-footer\">\n                    <a href=\"\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443</a>\n                </div>\n            </div>\n        </div>");
+    return "<div class=\"col-8 col-sm-6 col-md-5 col-lg-3 card-col\" id=\"board-".concat(board.id, "\">\n                    <div class=\"card board\">\n                        <div class=\"card-header\">\n                            <a href=\"\" class=\"board-title\" data-board_id=\"").concat(board.id, "\">").concat(board.title, "</a>\n                        </div>\n                        <div class=\"card-body\">\n                        </div>\n                        <div class=\"card-footer\">\n                            <a href=\"\" class=\"createBoardTaskBtn\" data-board_id=\"").concat(board.id, "\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443</a>\n                        </div>\n                    </div>\n                </div>");
   }
 });
 /******/ })()

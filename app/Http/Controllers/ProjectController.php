@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreOrUpdateProjectRequest;
 use App\Models\TodoList;
-use App\Repositories\BoardsRepository;
+use App\Repositories\BoardRepository;
+use App\Repositories\BoardTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -63,14 +64,18 @@ class ProjectController extends Controller
         $data = ['project']; // data that'll be passed to the view
 
         $todo = TodoListRepository::getTodo($id);
-        $boards = BoardsRepository::getAll($id);
+        $boards = BoardRepository::getAll($id);
 
         if (!empty($todo)) {
             $todoTasks = TodoList::find($todo->id)->tasks->sortDesc();
             array_push($data, 'todo', 'todoTasks');
         }
         if (!empty($boards)) {
-            $data[] = 'boards';
+            foreach($boards as $board) {
+                $boardTasksArray[] = BoardTaskRepository::getAll($board->id);
+            }
+
+            array_push($data, 'boards', 'boardTasksArray');
         }
 
         return view('project.show', compact($data));
