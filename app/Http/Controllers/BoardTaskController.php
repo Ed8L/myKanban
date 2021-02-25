@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BoardTask\StoreBoardTaskRequest;
+use App\Http\Requests\BoardTask\UpdateBoardTaskRequest;
 use App\Repositories\BoardTaskRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -25,5 +26,36 @@ class BoardTaskController extends Controller
         unset($newBoardTask['board_id']);
 
         return response()->json(['success' => true, 'boardTask' => $newBoardTask]);
+    }
+
+    /**
+     * Get the data to update
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function edit($id)
+    {
+        $boardTask = BoardTaskRepository::getById($id);
+
+        return response()->json(['success' => true, 'boardTask' => $boardTask]);
+    }
+
+    public function update(UpdateBoardTaskRequest $request, $id)
+    {
+        $boardTask = BoardTaskRepository::update($id, $request->validated());
+
+        return response()->json(['success' => true, 'boardTask' => $boardTask]);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = BoardTaskRepository::delete($id);
+
+        if($deleted) {
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'msg' => 'Ошибка удаления']);
     }
 }

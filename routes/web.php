@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('todo', TodoListController::class)->only(['store', 'destroy']);
     Route::resource('board', BoardController::class)->only(['store', 'update', 'destroy', 'edit']);
     Route::resource('todoListTask', TodoListTaskController::class)->only(['store', 'edit', 'update', 'destroy']);
-    Route::resource('boardTask', BoardTaskController::class)->only('store');
+    Route::resource('boardTask', BoardTaskController::class)->only('store', 'edit', 'update', 'destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,4 +1,6 @@
 @include('board.boardTask.components.create_boardTask-modal')
+@include('board.boardTask.components.edit_boardTask-modal')
+
 @foreach($boards as $board)
     <div class="col-8 col-sm-6 col-md-5 col-lg-3 card-col" id="board-{{ $board->id }}">
         <div class="card board">

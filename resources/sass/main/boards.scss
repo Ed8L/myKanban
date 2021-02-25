@@ -19,3 +19,10 @@
 .boardTask-card {
     background-color: $main_color;
 }
+
+.boardTask-text {
+    color: $action_color;
+    &:hover {
+        color: $action_color-hover;
+    }
+}

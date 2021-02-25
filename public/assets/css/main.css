@@ -24,6 +24,13 @@
   background-color: #232931;
 }
 
+.boardTask-text {
+  color: #16c79a;
+}
+.boardTask-text:hover {
+  color: #0aa17b;
+}
+
 .todo-table {
   color: white;
 }
