@@ -7,20 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class BoardRepository
 {
-    /**
-     * Get board by id
-     *
-     * @param $id
-     * @return mixed
-     */
-    public static function getById($id)
-    {
-        return DB::table('boards')
-            ->select('id', 'title')
-            ->where('id', $id)
-            ->get()
-            ->first();
-    }
+    private static string $tableName = 'boards';
 
     /**
      * Get all project boards
@@ -30,11 +17,42 @@ class BoardRepository
      */
     public static function getAll(int $projectId)
     {
-        return DB::table('boards')
+        return DB::table(self::$tableName)
             ->select('id', 'project_id', 'title')
             ->where('project_id', $projectId)
             ->get()
             ->toArray();
+    }
+
+    /**
+     * Get board by its id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function getById($id)
+    {
+        return DB::table(self::$tableName)
+            ->select('id', 'title')
+            ->where('id', $id)
+            ->get()
+            ->first();
+    }
+
+    /**
+     * Create a new board
+     *
+     * @param $columns
+     * @return Board
+     */
+    public static function create($columns)
+    {
+        $board = new Board();
+
+        $board->fill($columns);
+        $board->save();
+
+        return $board;
     }
 
     /**
@@ -44,7 +62,7 @@ class BoardRepository
      * @param $title
      * @return mixed
      */
-    public static function update($id, $title)
+    public static function edit($id, $title)
     {
         $board = Board::find($id);
 
@@ -55,21 +73,11 @@ class BoardRepository
     }
 
     /**
-     * Save board to database
+     * Delete the board
      *
-     * @param $columns
-     * @return Board
+     * @param $id
+     * @return bool
      */
-    public static function store($columns)
-    {
-        $board = new Board();
-
-        $board->fill($columns);
-        $board->save();
-
-        return $board;
-    }
-
     public static function delete($id)
     {
         $board = Board::find($id);

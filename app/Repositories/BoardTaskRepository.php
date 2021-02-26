@@ -7,18 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class BoardTaskRepository
 {
-    public static function getById($boardTaskId)
-    {
-        return DB::table('board_tasks')
-            ->select('id', 'board_id', 'text', 'note')
-            ->where('id', $boardTaskId)
-            ->get()
-            ->first();
-    }
+    private static string $tableName = 'board_tasks';
 
-    public static function getAll($boardId)
+    /**
+     * Get all board's tasks
+     *
+     * @param $boardId
+     * @return array
+     */
+    public static function getAll(int $boardId)
     {
-        return DB::table('board_tasks')
+        return DB::table(self::$tableName)
             ->select('id', 'board_id', 'text', 'note')
             ->where('board_id', $boardId)
             ->orderBy('id', 'desc')
@@ -26,7 +25,28 @@ class BoardTaskRepository
             ->toArray();
     }
 
-    public static function save($columns)
+    /**
+     * Get board's task
+     *
+     * @param $boardTaskId
+     * @return mixed
+     */
+    public static function getById(int $boardTaskId)
+    {
+        return DB::table(self::$tableName)
+            ->select('id', 'board_id', 'text', 'note')
+            ->where('id', $boardTaskId)
+            ->get()
+            ->first();
+    }
+
+    /**
+     * Create a new board task
+     *
+     * @param $columns
+     * @return BoardTask
+     */
+    public static function create(array $columns)
     {
         $boardTask = new BoardTask;
 
@@ -36,7 +56,14 @@ class BoardTaskRepository
         return $boardTask;
     }
 
-    public static function update(int $id, array $columns)
+    /**
+     * Edit the board's task
+     *
+     * @param int $id
+     * @param array $columns
+     * @return mixed
+     */
+    public static function edit(int $id, array $columns)
     {
         $boardTask = BoardTask::find($id);
 
@@ -46,7 +73,13 @@ class BoardTaskRepository
         return $boardTask;
     }
 
-    public static function delete($id)
+    /**
+     * Delete the board's task
+     *
+     * @param int $id
+     * @return int
+     */
+    public static function delete(int $id)
     {
         return BoardTask::destroy($id);
     }

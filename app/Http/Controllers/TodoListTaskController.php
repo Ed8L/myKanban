@@ -9,14 +9,14 @@ use Illuminate\Http\JsonResponse;
 class TodoListTaskController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created TodoList task in storage.
      *
      * @param TodoListTaskRequest $request
      * @return JsonResponse
      */
     public function store(TodoListTaskRequest $request)
     {
-        $newTask = TodoListTaskRepository::store($request->validated());
+        $newTask = TodoListTaskRepository::create($request->validated());
         $newTask = $newTask->getAttributes();
 
         //Delete unnecessary fields
@@ -31,7 +31,7 @@ class TodoListTaskController extends Controller
     }
 
     /**
-     * Get the data to update
+     * Get the TodoList task to update.
      *
      * @param $id
      * @return JsonResponse
@@ -44,7 +44,7 @@ class TodoListTaskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified TodoList task.
      *
      * @param TodoListTaskRequest $request
      * @param int $id
@@ -52,13 +52,13 @@ class TodoListTaskController extends Controller
      */
     public function update(TodoListTaskRequest $request, $id)
     {
-        $updated = TodoListTaskRepository::update($id, $request->validated());
+        $updated = TodoListTaskRepository::edit($id, $request->validated());
 
         return response()->json(['updated' => true, 'task' => $updated]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified TodoList Task from storage.
      *
      * @param  int  $id
      * @return JsonResponse

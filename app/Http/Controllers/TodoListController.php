@@ -18,7 +18,7 @@ class TodoListController extends Controller
     {
         $projectId = $request->id;
 
-        TodoListRepository::store($projectId);
+        TodoListRepository::create($projectId);
 
         return back()->with('success', 'ToDo создан!');
     }

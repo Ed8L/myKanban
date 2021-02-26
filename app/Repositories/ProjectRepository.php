@@ -16,7 +16,7 @@ class ProjectRepository
      *
      * @return Collection
      */
-    public static function getAll(): Collection
+    public static function getAll()
     {
         return DB::table(self::$tableName)
             ->where('user_id', auth()->user()->id)
@@ -38,10 +38,12 @@ class ProjectRepository
     }
 
     /**
+     * Create a new project in database
+     *
      * @param $title
      * @return Project
      */
-    public static function store($title): Project
+    public static function create($title): Project
     {
         $newProject = new Project;
 
@@ -59,18 +61,14 @@ class ProjectRepository
      * @param array $columns
      * @return mixed
      */
-    public static function update(int $project_id, array $columns)
+    public static function edit(int $project_id, array $columns)
     {
-        if (self::exists($project_id)) {
-            $project = Project::find($project_id);
+        $project = Project::find($project_id);
 
-            $project->fill($columns);
-            $project->save();
+        $project->fill($columns);
+        $project->save();
 
-            return $project;
-        }
-
-        return false;
+        return $project;
     }
 
     /**

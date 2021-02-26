@@ -17,7 +17,7 @@ class StoreOrUpdateProjectRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Validation rules to incoming request.
      *
      * @return array
      */
@@ -30,7 +30,7 @@ class StoreOrUpdateProjectRequest extends FormRequest
     }
 
     /**
-     * Get the custom messages
+     * Custom messages
      *
      * @return array
      */

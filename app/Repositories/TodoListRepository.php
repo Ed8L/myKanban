@@ -4,17 +4,34 @@
 namespace app\Repositories;
 
 use App\Models\TodoList;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 class TodoListRepository
 {
+    private static string $tableName = 'todo_lists';
     /**
-     * Store a new todoList
+     * Returns a TodoList by it's project_id
+     *
+     * @param int $projectId
+     * @return Model|Builder|object|null
+     */
+    public static function getTodo(int $projectId)
+    {
+        return DB::table(self::$tableName)
+            ->where('project_id', $projectId)
+            ->select('id')
+            ->first();
+    }
+
+    /**
+     * Create a new TodoList
      *
      * @param $projectId
      * @return TodoList
      */
-    public static function store($projectId)
+    public static function create($projectId)
     {
         $todo = new TodoList();
 
@@ -24,33 +41,31 @@ class TodoListRepository
         return $todo;
     }
 
-    public static function delete($projectId)
-    {
-        if(self::exists($projectId)) {
-            $todo = TodoList::where('project_id', $projectId)
-                ->first();
-            return $todo->delete();
-        }
-
-        return false;
-    }
-
-    public static function getTodo($projectId)
-    {
-        return DB::table('todo_lists')
-            ->where('project_id', $projectId)
-            ->select('id')
-            ->first();
-    }
-
     /**
      * Check if the todoList exists
      *
      * @param $projectId
      * @return bool
      */
-    private static function exists($projectId): bool
+    private static function exists(int $projectId)
     {
         return DB::table('todo_lists')->where('project_id', $projectId)->exists();
+    }
+
+    /**
+     * Delete the TodoList
+     *
+     * @param int $projectId
+     * @return bool
+     */
+    public static function delete(int $projectId)
+    {
+        if (self::exists($projectId)) {
+            $todo = TodoList::where('project_id', $projectId)
+                ->first();
+            return $todo->delete();
+        }
+
+        return false;
     }
 }

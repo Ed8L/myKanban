@@ -10,20 +10,20 @@ use App\Repositories\BoardRepository;
 class BoardController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created board in storage.
      *
      * @param StoreBoardRequest $request
      * @return JsonResponse
      */
     public function store(StoreBoardRequest $request)
     {
-        $board = BoardRepository::store($request->validated());
+        $board = BoardRepository::create($request->validated());
 
         return response()->json(['created' => true, 'board' => $board]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Get the board data to update.
      *
      * @param  int  $id
      * @return JsonResponse
@@ -46,7 +46,7 @@ class BoardController extends Controller
      */
     public function update(UpdateBoardRequest $request, $id)
     {
-        $boardTitle = BoardRepository::update($id, $request->title);
+        $boardTitle = BoardRepository::edit($id, $request->title);
 
         return response()->json(['updated' => true, 'newTitle' => $boardTitle]);
     }

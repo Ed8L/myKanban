@@ -17,7 +17,7 @@ use App\Repositories\TodoListRepository;
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of projects
+     * Display user's all projects.
      * @return Application|Factory|View
      */
     public function index()
@@ -33,9 +33,9 @@ class ProjectController extends Controller
      * @param StoreOrUpdateProjectRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreOrUpdateProjectRequest $request): RedirectResponse
+    public function store(StoreOrUpdateProjectRequest $request)
     {
-        $created = ProjectRepository::store($request->title);
+        $created = ProjectRepository::create($request->title);
 
         if ($created) {
             return redirect()
@@ -49,22 +49,22 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified project.
      *
      * @param int $id
      * @return Application|Factory|View
      */
-    public function show(int $id)
+    public function show(int $projectId)
     {
-        $project = ProjectRepository::getById($id);
+        $project = ProjectRepository::getById($projectId);
         if (empty($project)) {
             abort(404);
         }
 
-        $data = ['project']; // data that'll be passed to the view
+        $data = ['project']; // data that'll be passed to the view by compact() function
 
-        $todo = TodoListRepository::getTodo($id);
-        $boards = BoardRepository::getAll($id);
+        $todo = TodoListRepository::getTodo($projectId);
+        $boards = BoardRepository::getAll($projectId);
 
         if (!empty($todo)) {
             $todoTasks = TodoList::find($todo->id)->tasks->sortDesc();
@@ -90,7 +90,7 @@ class ProjectController extends Controller
      */
     public function update(StoreOrUpdateProjectRequest $request, int $id): JsonResponse
     {
-        $updated = ProjectRepository::update($id, $request->validated());
+        $updated = ProjectRepository::edit($id, $request->validated());
 
         if ($updated) {
             return response()->json([
@@ -109,7 +109,7 @@ class ProjectController extends Controller
      * Delete the the project.
      *
      * @param int $id
-     * @return JsonResponse|RedirectResponse
+     * @return JsonResponse
      */
     public function destroy(int $id)
     {

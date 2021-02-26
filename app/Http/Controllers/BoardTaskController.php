@@ -11,14 +11,14 @@ use Illuminate\Http\JsonResponse;
 class BoardTaskController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created board task in storage.
      *
      * @param StoreBoardTaskRequest $request
      * @return JsonResponse
      */
     public function store(StoreBoardTaskRequest $request)
     {
-        $newBoardTask = BoardTaskRepository::save($request->validated());
+        $newBoardTask = BoardTaskRepository::create($request->validated());
         $newBoardTask = $newBoardTask->getAttributes();
 
         //Delete unnecessary fields
@@ -30,7 +30,7 @@ class BoardTaskController extends Controller
     }
 
     /**
-     * Get the data to update
+     * Get the board task data to update.
      *
      * @param $id
      * @return JsonResponse
@@ -42,18 +42,37 @@ class BoardTaskController extends Controller
         return response()->json(['success' => true, 'boardTask' => $boardTask]);
     }
 
+    /**
+     * Update a board task
+     *
+     * @param UpdateBoardTaskRequest $request
+     * @param $id
+     * @return JsonResponse
+     */
     public function update(UpdateBoardTaskRequest $request, $id)
     {
-        $boardTask = BoardTaskRepository::update($id, $request->validated());
+        $boardTask = BoardTaskRepository::edit($id, $request->validated());
 
         return response()->json(['success' => true, 'boardTask' => $boardTask]);
     }
 
+    /**
+     * Update a board task's parent
+     *
+     * @param Request $request
+     * @param $id
+     */
     public function updateBoard(Request $request, $id)
     {
-        BoardTaskRepository::update($id, ['board_id' => $request->boardId]);
+        BoardTaskRepository::edit($id, ['board_id' => $request->boardId]);
     }
 
+    /**
+     * Delete a board task
+     *
+     * @param $id
+     * @return JsonResponse
+     */
     public function destroy($id)
     {
         $deleted = BoardTaskRepository::delete($id);
