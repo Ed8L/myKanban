@@ -20,4 +20,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('boardTask', BoardTaskController::class)->only('store', 'edit', 'update', 'destroy');
 });
 
+Route::patch('/boardTaskSort/{boardTask}', [BoardTaskController::class, 'updateBoard']);
+
 require __DIR__ . '/auth.php';

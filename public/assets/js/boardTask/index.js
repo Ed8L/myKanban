@@ -3,6 +3,25 @@
   !*** ./resources/js/boardTask/index.js ***!
   \*****************************************/
 $(document).ready(function () {
+  var boards = $('.board-tasks');
+  boards.each(function (index, value) {
+    new Sortable(value, {
+      handle: '.boardTask-card',
+      group: 'shared',
+      animation: 200,
+      onChange: function onChange(evt) {
+        var sortedTaskId = evt.item.dataset.boardtaskid;
+        var newBoardId = evt.to.dataset.board_id;
+        $.ajax({
+          method: 'PATCH',
+          url: "/boardTaskSort/".concat(sortedTaskId),
+          data: {
+            'boardId': newBoardId
+          }
+        });
+      }
+    });
+  });
   var createBoardTaskModal = $('#create_boardTask-modal');
   var editBoardTaskModal = $('#edit_boardTask-modal');
   createBoardTaskModal.on('hidden.bs.modal', function () {
@@ -23,11 +42,11 @@ $(document).ready(function () {
   $('.boards-row').on('click', '.createBoardTaskBtn', function (e) {
     e.preventDefault();
     var boardId = e.currentTarget.dataset.board_id;
-    document.querySelector('#createBoardTask').dataset.board_id = boardId;
+    document.getElementById('createBoardTask').dataset.board_id = boardId;
     createBoardTaskModal.modal('show');
   }); //Создание задачи
 
-  $('#createBoardTask').click(function (e) {
+  $('.boards-row').on('click', '#createBoardTask', function (e) {
     var boardTaskText = $('#boardTaskText');
     var boardTaskNote = $('#boardTaskNote');
     var boardId = e.currentTarget.dataset.board_id;
@@ -41,7 +60,7 @@ $(document).ready(function () {
       },
       dataType: 'JSON',
       success: function success(response) {
-        var newBoardTask = newBoardTaskHtml(response.boardTask);
+        var newBoardTask = 123;
         $("#board-".concat(boardId)).find('.board-tasks').prepend(newBoardTask);
       },
       error: function error(response) {

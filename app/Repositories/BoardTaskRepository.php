@@ -36,7 +36,7 @@ class BoardTaskRepository
         return $boardTask;
     }
 
-    public static function update($id, $columns)
+    public static function update(int $id, array $columns)
     {
         $boardTask = BoardTask::find($id);
 

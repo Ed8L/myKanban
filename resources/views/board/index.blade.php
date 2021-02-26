@@ -7,7 +7,7 @@
             <div class="card-header">
                 <a href="" class="board-title" data-board_id="{{ $board->id }}">{{ $board->title }}</a>
             </div>
-            <div class="card-body board-tasks">
+            <div class="card-body board-tasks" data-board_id="{{ $board->id }}">
                 @include('board.boardTask.index')
             </div>
             <div class="card-footer">

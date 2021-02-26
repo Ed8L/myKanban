@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BoardTask\StoreBoardTaskRequest;
 use App\Http\Requests\BoardTask\UpdateBoardTaskRequest;
 use App\Repositories\BoardTaskRepository;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class BoardTaskController extends Controller
@@ -46,6 +47,11 @@ class BoardTaskController extends Controller
         $boardTask = BoardTaskRepository::update($id, $request->validated());
 
         return response()->json(['success' => true, 'boardTask' => $boardTask]);
+    }
+
+    public function updateBoard(Request $request, $id)
+    {
+        BoardTaskRepository::update($id, ['board_id' => $request->boardId]);
     }
 
     public function destroy($id)

@@ -1,4 +1,27 @@
 $(document).ready(() => {
+    const boards = $('.board-tasks');
+
+    boards.each((index, value) => {
+        new Sortable(value, {
+            handle: '.boardTask-card',
+            group: 'shared',
+            animation: 200,
+
+            onChange: function (evt) {
+                const sortedTaskId = evt.item.dataset.boardtaskid;
+                const newBoardId = evt.to.dataset.board_id;
+
+                $.ajax({
+                    method: 'PATCH',
+                    url: `/boardTaskSort/${sortedTaskId}`,
+                    data: {
+                        'boardId': newBoardId
+                    }
+                });
+            }
+        });
+    });
+
     const createBoardTaskModal = $('#create_boardTask-modal');
     const editBoardTaskModal = $('#edit_boardTask-modal');
 
@@ -26,13 +49,13 @@ $(document).ready(() => {
         e.preventDefault();
         const boardId = e.currentTarget.dataset.board_id;
 
-        document.querySelector('#createBoardTask').dataset.board_id = boardId
+        document.getElementById('createBoardTask').dataset.board_id = boardId;
 
         createBoardTaskModal.modal('show');
     });
 
     //Создание задачи
-    $('#createBoardTask').click((e) => {
+    $('.boards-row').on('click', '#createBoardTask', (e) => {
         const boardTaskText = $('#boardTaskText');
         const boardTaskNote = $('#boardTaskNote');
         const boardId = e.currentTarget.dataset.board_id;
@@ -47,7 +70,7 @@ $(document).ready(() => {
             },
             dataType: 'JSON',
             success(response) {
-                const newBoardTask = newBoardTaskHtml(response.boardTask);
+                const newBoardTask = 123;
                 $(`#board-${boardId}`).find('.board-tasks').prepend(newBoardTask);
             },
             error(response) {
@@ -72,7 +95,7 @@ $(document).ready(() => {
             url: `/boardTask/${boardTaskId}/edit`,
             dataType: 'JSON',
             success(response) {
-                if(response.success) {
+                if (response.success) {
                     const boardTask = response.boardTask;
 
                     editBoardTaskModal.find('.modal-title').text(boardTask.text);
@@ -105,7 +128,7 @@ $(document).ready(() => {
             },
             dataType: 'JSON',
             success(response) {
-                if(response.success) {
+                if (response.success) {
                     const boardTask = response.boardTask;
                     $(`#boardTask-${boardTaskId}`).find('.boardTask-text').text(boardTask.text);
                     editBoardTaskModal.modal('hide');
@@ -133,7 +156,7 @@ $(document).ready(() => {
             url: `/boardTask/${boardTaskId}`,
             dataType: 'JSON',
             success(response) {
-                if(response.success) {
+                if (response.success) {
                     $(`#boardTask-${boardTaskId}`).remove();
                     editBoardTaskModal.modal('hide');
                 }
