@@ -7,6 +7,7 @@ $(document).ready(() => {
         }
     });
 
+    //Добавления задачи
     $('#addTaskForm').submit((e) => {
         e.preventDefault();
         $('.invalid-feedback').remove();
@@ -48,6 +49,7 @@ $(document).ready(() => {
         });
     });
 
+    //Открытие модального окна для редактирования задачи
     $('#todoListBody').on('click', '.task', (e) => {
         const taskId = Number(e.currentTarget.dataset.taskid);
 
@@ -74,6 +76,7 @@ $(document).ready(() => {
         });
     });
 
+    //Редактирование задачи
     $('#editTask').click((e) => {
         const taskInput = taskModal.find('[type="text"]');
         const taskDue = taskModal.find('[type="date"]');
@@ -111,6 +114,7 @@ $(document).ready(() => {
         });
     });
 
+    //Удаление задачи
     $('#deleteTask').click((e) => {
         const taskId = Number(e.currentTarget.dataset.taskId);
 
@@ -127,6 +131,7 @@ $(document).ready(() => {
         });
     });
 
+    //Формативание даты срока
     function formatDate(date) {
         const dueObject = new Date(date);
         const months = {

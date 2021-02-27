@@ -1,23 +1,7 @@
 $(document).ready(() => {
+
+    //Bootstrap alert
     $('.alert').alert();
-
-    const newTitleInput = $('#project_newTitle-input'); // renaming project input
-    const editProjectModal = $('#edit_project-modal');
-
-    function clearModal(modalSelector) {
-        modalSelector.find('.invalid-feedback').remove();
-        modalSelector.find('.c-red').remove();
-    }
-
-    // Fill input with project name
-    $('.project-edit').click((e) => {
-        newTitleInput.val(e.currentTarget.dataset.name);
-        newTitleInput.data('id', e.currentTarget.dataset.id);
-    });
-
-    editProjectModal.on('hidden.bs.modal', function (e) {
-        clearModal(editProjectModal);
-    });
 
     $.ajaxSetup({
         headers: {
@@ -25,6 +9,19 @@ $(document).ready(() => {
         }
     });
 
+    const newTitleInput = $('#project_newTitle-input');
+    const editProjectModal = $('#edit_project-modal');
+
+    function clearModal(modalSelector) {
+        modalSelector.find('.invalid-feedback').remove();
+        modalSelector.find('.c-red').remove();
+    }
+
+    editProjectModal.on('hidden.bs.modal', function (e) {
+        clearModal(editProjectModal);
+    });
+
+    //Удаление проекта
     $('.delete_project-btn').click((e) => {
         if (window.confirm("Вы уверены что хотите удалить этот проект?")) {
             const projectId = Number(e.currentTarget.dataset.id);
@@ -44,6 +41,13 @@ $(document).ready(() => {
         }
     });
 
+    // Вставить имя проекта в инпут модального окна
+    $('.project-edit').click((e) => {
+        newTitleInput.val(e.currentTarget.dataset.name);
+        newTitleInput.data('id', e.currentTarget.dataset.id);
+    });
+
+    // Редактирование проекта
     $('.edit_project-btn').click(() => {
         const projectId = Number(newTitleInput.data('id'));
         $.ajax({

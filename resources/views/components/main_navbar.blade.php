@@ -9,9 +9,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('userProfile') }}">Профиль</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Настройки профиля</a>
-            </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">

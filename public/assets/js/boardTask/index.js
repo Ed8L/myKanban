@@ -60,7 +60,7 @@ $(document).ready(function () {
       },
       dataType: 'JSON',
       success: function success(response) {
-        var newBoardTask = 123;
+        var newBoardTask = newBoardTaskHtml(response.boardTask);
         $("#board-".concat(boardId)).find('.board-tasks').prepend(newBoardTask);
       },
       error: function error(response) {

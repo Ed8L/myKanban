@@ -1,6 +1,16 @@
 $(document).ready(() => {
     const boards = $('.board-tasks');
+    const boardsRow = $('.boards-row');
+    const createBoardTaskModal = $('#create_boardTask-modal');
+    const editBoardTaskModal = $('#edit_boardTask-modal');
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    //Перетаскивание задач
     boards.each((index, value) => {
         new Sortable(value, {
             handle: '.boardTask-card',
@@ -22,20 +32,13 @@ $(document).ready(() => {
         });
     });
 
-    const createBoardTaskModal = $('#create_boardTask-modal');
-    const editBoardTaskModal = $('#edit_boardTask-modal');
-
+    //Очищение модального окна
     createBoardTaskModal.on('hidden.bs.modal', () => {
         createBoardTaskModal.find('input').val('');
         createBoardTaskModal.find('textarea').val('');
     })
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
+    //Верстка задачи
     function newBoardTaskHtml(boardTask) {
         return `<div class="card mb-3 boardTask-card" id="boardTask-${boardTask.id}">
                     <a class="card-body boardTask-text" data-boardTask_id="${boardTask.id}">
@@ -45,7 +48,7 @@ $(document).ready(() => {
     }
 
     //Передача board_id в модальное окно для создания задачи
-    $('.boards-row').on('click', '.createBoardTaskBtn', (e) => {
+    boardsRow.on('click', '.createBoardTaskBtn', (e) => {
         e.preventDefault();
         const boardId = e.currentTarget.dataset.board_id;
 
@@ -55,7 +58,7 @@ $(document).ready(() => {
     });
 
     //Создание задачи
-    $('.boards-row').on('click', '#createBoardTask', (e) => {
+    boardsRow.on('click', '#createBoardTask', (e) => {
         const boardTaskText = $('#boardTaskText');
         const boardTaskNote = $('#boardTaskNote');
         const boardId = e.currentTarget.dataset.board_id;
@@ -70,7 +73,7 @@ $(document).ready(() => {
             },
             dataType: 'JSON',
             success(response) {
-                const newBoardTask = 123;
+                const newBoardTask = newBoardTaskHtml(response.boardTask);
                 $(`#board-${boardId}`).find('.board-tasks').prepend(newBoardTask);
             },
             error(response) {
@@ -87,7 +90,7 @@ $(document).ready(() => {
     });
 
     //Передача данных для редактирования в модальное окно
-    $('.board-tasks').on('click', '.boardTask-text', (e) => {
+    boards.on('click', '.boardTask-text', (e) => {
         const boardTaskId = e.currentTarget.dataset.boardtask_id;
 
         $.ajax({

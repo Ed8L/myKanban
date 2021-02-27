@@ -18,8 +18,8 @@ class BoardTaskRepository
     public static function getAll(int $boardId)
     {
         return DB::table(self::$tableName)
-            ->select('id', 'board_id', 'text', 'note')
             ->where('board_id', $boardId)
+            ->select('id', 'board_id', 'text', 'note')
             ->orderBy('id', 'desc')
             ->get()
             ->toArray();
@@ -34,8 +34,8 @@ class BoardTaskRepository
     public static function getById(int $boardTaskId)
     {
         return DB::table(self::$tableName)
-            ->select('id', 'board_id', 'text', 'note')
             ->where('id', $boardTaskId)
+            ->select('id', 'board_id', 'text', 'note')
             ->get()
             ->first();
     }

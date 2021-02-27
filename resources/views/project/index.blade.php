@@ -1,3 +1,6 @@
+@include('project.components.create_project-modal')
+@include('project.components.edit_project-modal')
+
 <div class="card main-card">
     <div class="card-body">
         <div class="row">
